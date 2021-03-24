@@ -29,7 +29,7 @@ const Drop = () => {
 const Navbar = () => {
   return (
     <div
-      className={`d-flex bg-white justify-content-between align-items-center ${styles.navbar}`}
+      className={`d-flex bg-brown text-white justify-content-between align-items-center ${styles.navbar}`}
     >
       <Logo />
       <MenuBar />
