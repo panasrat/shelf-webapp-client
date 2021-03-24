@@ -1,12 +1,16 @@
 import React from 'react';
 
 import Header from '../components/Header';
+import Login from '../components/Login';
 
 const login = () => {
   return (
-    <div className=''>
+    <>
       <Header title='Login Page'></Header>
-    </div>
+      <main>
+        <Login />
+      </main>
+    </>
   );
 };
 

@@ -4,9 +4,12 @@ import Header from '../components/Header';
 
 const signup = () => {
   return (
-    <div className=''>
+    <>
       <Header title='Sign Up Page'></Header>
-    </div>
+      <main>
+        <h1>Sign Up</h1>
+      </main>
+    </>
   );
 };
 

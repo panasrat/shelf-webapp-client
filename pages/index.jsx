@@ -5,21 +5,23 @@ import Header from '../components/Header';
 import Item from '../components/Item';
 
 const home = ({ items }) => {
-  //const [items, setItems] = useState([])
+  // console.log(items);
   let recentItemsMarkup = items ? (
-    items.map((item) => <Item key={`${item.itemId}`} item={item}></Item>)
+    items.map((item) => <Item key={item.itemId} item={item}></Item>)
   ) : (
     <p>Loading...</p>
   );
   // console.log(recentItemsMarkup);
   return (
-    <div className='bg-lightgrey'>
+    <>
       <Header title='Home Page'></Header>
-      <div className='d-flex bg-lightgrey' style={{ padding: '100px' }}>
-        <p className='col-8 bg-pink'>{recentItemsMarkup}</p>
-        <p className='col-4 bg-brown text-white'>Profile</p>
-      </div>
-    </div>
+      <main>
+        <div className='d-flex bg-lightgrey' style={{ padding: '20px 100px' }}>
+          <div className='col-8 bg-pink'>{recentItemsMarkup}</div>
+          <p className='col-4 bg-brown text-white'>Profile</p>
+        </div>
+      </main>
+    </>
   );
 };
 
