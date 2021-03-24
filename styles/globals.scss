@@ -1,0 +1,77 @@
+@import './variables';
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  background-color: $theme-lightgrey;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+@media (max-width: 320px) {
+  html {
+    font-size: 13px;
+  }
+}
+
+@media (min-width: 321px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 576px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 15px;
+  }
+}
+
+@media (min-width: 992px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 1200px) {
+  html {
+    font-size: 18px;
+  }
+}
+
+$custom-colors: () !default;
+$custom-colors: map-merge(
+  (
+    'pink': $theme-pink,
+    'peach': $theme-peach,
+    'brown': $theme-brown,
+    'darkgrey': $theme-darkgrey,
+    'white': $theme-white,
+    'lightgrey': $theme-lightgrey,
+  ),
+  $custom-colors
+);
+
+@each $colorName, $colorValue in $custom-colors {
+  .text-#{$colorName} {
+    color: $colorValue !important;
+  }
+  .bg-#{$colorName} {
+    background-color: $colorValue !important;
+  }
+}
