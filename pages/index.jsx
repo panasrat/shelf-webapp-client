@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import Router from 'next/router';
+import jwtDecode from 'jwt-decode';
 import styles from '../styles/pages.module.scss';
 
 import Header from '../components/Header';
@@ -11,7 +13,7 @@ const home = ({ items }) => {
   ) : (
     <p>Loading...</p>
   );
-  // console.log(recentItemsMarkup);
+
   return (
     <>
       <Header title='Home Page'></Header>
