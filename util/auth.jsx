@@ -1,56 +1,42 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import jwtDecode from 'jwt-decode';
 import Router, { useRouter } from 'next/router';
+import { connect } from 'react-redux';
+import { loginUser } from '../redux/actions/userActions';
 
-const AuthContext = createContext({});
-
-export const AuthProvider = ({ children }) => {
-  //   const [user, setUser] = useState(null);
-  //   const [loading, setLoading] = useState(true);
-  const [authenticated, setAuthenticated] = useState(false);
-
-  const setAuthTrue = () => setAuthenticated(true);
+export const AuthRoute = ({ children, authenticated }) => {
+  const router = useRouter();
+  const [token, setToken] = useState('');
 
   useEffect(() => {
-    async function checkTokenInLocalStorage() {
-      const token = localStorage.FBIdToken;
-      if (token) {
-        console.log('Got a token in the local storage');
-        const decodedToken = jwtDecode(token);
-        if (decodedToken.exp * 1000 < Date.now()) {
-          console.log('Token expired');
-          Router.push('/login');
-        }
-        setAuthenticated(true);
+    const FBIdToken = localStorage.FBIdToken;
+    const checkAuthenticated = async () => {
+      if (authenticated || FBIdToken) {
+        setToken(FBIdToken);
+        Router.push('/');
       } else {
-        console.log('No token yet');
         Router.push('/login');
       }
-    }
-    checkTokenInLocalStorage();
+    };
+    checkAuthenticated();
   }, []);
 
-  return (
-    <AuthContext.Provider
-      value={{ isAuthenticated: authenticated, setAuthTrue }}
-    >
-      {children}
-    </AuthContext.Provider>
-  );
-};
+  console.log('auth', authenticated);
 
-export const useAuth = () => useContext(AuthContext);
-
-export const ProtectRoute = ({ children }) => {
-  const router = useRouter();
-  const { isAuthenticated } = useAuth();
-  console.log('auth', isAuthenticated);
   if (
-    !isAuthenticated &&
+    !authenticated &&
+    !token &&
     router.pathname !== '/login' &&
     router.pathname !== '/signup'
   ) {
     return <h1>Loading</h1>;
   }
+
   return children;
 };
+
+const mapStateToProps = (state) => ({
+  authenticated: state.user.authenticated,
+});
+
+export const AuthRouteRedux = connect(mapStateToProps)(AuthRoute);

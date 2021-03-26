@@ -1,38 +1,31 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import Router from 'next/router';
 import Link from 'next/link';
 import axios from 'axios';
-import { useAuth } from '../../util/auth';
+// import { useAuth } from '../../util/auth';
 
-const Login = () => {
+import { connect } from 'react-redux';
+import { loginUser } from '../../redux/actions/userActions';
+
+const Login = ({ UI, loginUser }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
-  const { isAuthenticated, setAuthTrue } = useAuth();
+  // const { isAuthenticated, setAuthTrue } = useAuth();
+
+  useEffect(() => {
+    if (UI.errors) {
+      setErrors(UI.errors);
+    }
+  }, [UI.errors]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setLoading(true);
     const userData = {
       email: email,
       password: password,
     };
-    axios
-      .post(
-        'https://asia-southeast2-shelf-webapp-de58d.cloudfunctions.net/api/login',
-        userData
-      )
-      .then((res) => {
-        localStorage.setItem('FBIdToken', `Bearer ${res.data.token}`);
-        setLoading(false);
-        setAuthTrue();
-        Router.push('/');
-      })
-      .catch((err) => {
-        setErrors(err.response.data);
-        setLoading(false);
-      });
+    loginUser(userData);
   };
 
   const handleChangeEmail = (event) => {
@@ -75,7 +68,7 @@ const Login = () => {
         <small id='passwordHelpBlock' className='form-text text-muted'>
           {errors.password}
         </small>
-        <button type='submit' className='btn btn-primary' disabled={loading}>
+        <button type='submit' className='btn btn-primary'>
           Login
         </button>
         <small id='submitHelpBlock' className='form-text text-muted'>
@@ -89,4 +82,13 @@ const Login = () => {
   );
 };
 
-export default Login;
+const mapStateToProps = (state) => ({
+  user: state.user,
+  UI: state.UI,
+});
+
+const mapActionToProps = {
+  loginUser,
+};
+
+export default connect(mapStateToProps, mapActionToProps)(Login);

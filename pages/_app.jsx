@@ -1,13 +1,15 @@
 import '../styles/globals.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { AuthProvider, ProtectRoute } from '../util/auth';
+import { AuthRouteRedux } from '../util/auth';
+import { Provider } from 'react-redux';
+import store from '../redux/store';
 
 const MyApp = ({ Component, pageProps }) => (
-  <AuthProvider>
-    <ProtectRoute>
+  <Provider store={store}>
+    <AuthRouteRedux>
       <Component {...pageProps} />
-    </ProtectRoute>
-  </AuthProvider>
+    </AuthRouteRedux>
+  </Provider>
 );
 
 export default MyApp;

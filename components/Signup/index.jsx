@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Router from 'next/router';
 import Link from 'next/link';
 import axios from 'axios';
+// import { useAuth } from '../../util/auth';
 
 const Signup = () => {
   const [email, setEmail] = useState('');
@@ -10,6 +11,7 @@ const Signup = () => {
   const [handle, setHandle] = useState('');
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
+  // const { isAuthenticated, setAuthTrue } = useAuth();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -29,6 +31,7 @@ const Signup = () => {
         localStorage.setItem('FBIdToken', `Bearer ${res.data.token}`);
         console.log(res.data);
         setLoading(false);
+        // setAuthTrue();
         Router.push('/');
       })
       .catch((err) => {
