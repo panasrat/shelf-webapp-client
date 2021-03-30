@@ -1,45 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Router from 'next/router';
 import Link from 'next/link';
 import axios from 'axios';
 // import { useAuth } from '../../util/auth';
 
-const Signup = () => {
+import { connect } from 'react-redux';
+import { signupUser } from '../../redux/actions/userActions';
+
+const Signup = ({ UI, signupUser }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [handle, setHandle] = useState('');
-  const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
   // const { isAuthenticated, setAuthTrue } = useAuth();
 
+  useEffect(() => {
+    if (UI.errors) {
+      setErrors(UI.errors);
+    }
+  }, [UI.errors]);
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    setLoading(true);
     const newUserData = {
       email: email,
       password: password,
       confirmPassword: confirmPassword,
       handle: handle,
     };
-    axios
-      .post(
-        'https://asia-southeast2-shelf-webapp-de58d.cloudfunctions.net/api/signup',
-        newUserData
-      )
-      .then((res) => {
-        localStorage.setItem('FBIdToken', `Bearer ${res.data.token}`);
-        console.log(res.data);
-        setLoading(false);
-        // setAuthTrue();
-        Router.push('/');
-      })
-      .catch((err) => {
-        // console.log('ERR');
-        // console.error(err);
-        setErrors(err.response.data);
-        setLoading(false);
-      });
+    signupUser(newUserData);
   };
 
   const handleChangeEmail = (event) => {
@@ -122,7 +112,7 @@ const Signup = () => {
         <small id='passwordHelpBlock' className='form-text text-muted'>
           {errors.handle}
         </small>
-        <button type='submit' className='btn btn-primary' disabled={loading}>
+        <button type='submit' className='btn btn-primary' disabled={UI.loading}>
           Signup
         </button>
         <small id='submitHelpBlock' className='form-text text-muted'>
@@ -136,4 +126,13 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+const mapStateToProps = (state) => ({
+  user: state.user,
+  UI: state.UI,
+});
+
+const mapActionToProps = {
+  signupUser,
+};
+
+export default connect(mapStateToProps, mapActionToProps)(Signup);

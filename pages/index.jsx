@@ -5,6 +5,7 @@ import styles from '../styles/pages.module.scss';
 
 import Header from '../components/Header';
 import Item from '../components/Item';
+import SideProfile from '../components/SideProfile';
 
 const home = ({ items }) => {
   // console.log(items);
@@ -20,7 +21,9 @@ const home = ({ items }) => {
       <main>
         <div className='d-flex bg-lightgrey' style={{ padding: '20px 100px' }}>
           <div className='col-8 bg-pink'>{recentItemsMarkup}</div>
-          <p className='col-4 bg-brown text-white'>Profile</p>
+          <div className='col-4 bg-brown text-white'>
+            <SideProfile></SideProfile>
+          </div>
         </div>
       </main>
     </>
