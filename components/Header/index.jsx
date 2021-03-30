@@ -4,12 +4,12 @@ import Navbar from '../Navbar';
 
 const Header = ({ title }) => {
   return (
-    <div>
+    <>
       <Head>
         <title>{title}</title>
       </Head>
       <Navbar />
-    </div>
+    </>
   );
 };
 

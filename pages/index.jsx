@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import Router from 'next/router';
-import jwtDecode from 'jwt-decode';
+// import dynamic from 'next/dynamic';
 import styles from '../styles/pages.module.scss';
 
 import Header from '../components/Header';
 import Item from '../components/Item';
 import SideProfile from '../components/SideProfile';
+
+// const DynamicHeader = dynamic(() => import('../components/Header'), {
+//   ssr: false,
+// });
 
 const home = ({ items }) => {
   // console.log(items);
@@ -17,12 +20,12 @@ const home = ({ items }) => {
 
   return (
     <>
-      <Header title='Home Page'></Header>
+      <Header title='Home Page' />
       <main>
         <div className='d-flex bg-lightgrey' style={{ padding: '20px 100px' }}>
           <div className='col-8 bg-pink'>{recentItemsMarkup}</div>
           <div className='col-4 bg-brown text-white'>
-            <SideProfile></SideProfile>
+            <SideProfile />
           </div>
         </div>
       </main>
@@ -41,3 +44,5 @@ export const getStaticProps = async () => {
 };
 
 export default home;
+
+// export default dynamic(() => Promise.resolve(home), { ssr: false });

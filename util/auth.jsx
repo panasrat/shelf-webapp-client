@@ -8,18 +8,13 @@ import { logoutUser } from '../redux/actions/userActions';
 export const AuthRoute = ({ children, authenticated, logoutUser }) => {
   const router = useRouter();
   const [token, setToken] = useState('');
-  console.log('here 1');
 
   useEffect(() => {
     const FBIdToken = localStorage.FBIdToken;
     const checkAuthenticated = async () => {
-      console.log('here 2');
       if (authenticated && FBIdToken) {
         setToken(FBIdToken);
         Router.push('/');
-      } else {
-        logoutUser();
-        Router.push('/login');
       }
     };
     checkAuthenticated();
@@ -31,7 +26,6 @@ export const AuthRoute = ({ children, authenticated, logoutUser }) => {
     router.pathname !== '/login' &&
     router.pathname !== '/signup'
   ) {
-    console.log('here 3');
     return (
       <h1>
         You are not login yet. Please Login <Link href='/login'>here</Link>
