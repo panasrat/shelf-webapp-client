@@ -2,6 +2,8 @@ import React from 'react';
 import Link from 'next/link';
 import dayjs from 'dayjs';
 
+import EditDetails from '../EditDetails';
+
 import { connect } from 'react-redux';
 import { logoutUser, uploadImage } from '../../redux/actions/userActions';
 
@@ -9,7 +11,7 @@ const SideProfile = ({
   user: {
     authenticated,
     loading,
-    credentials: { bio, handle, imageUrl, createdAt },
+    credentials: { bio, handle, imageUrl, createdAt, location, website },
   },
   uploadImage,
 }) => {
@@ -43,7 +45,10 @@ const SideProfile = ({
         </button>
       </div>
       {bio && <p>{bio}</p>}
+      {location && <p>{location}</p>}
+      {website && <p>{website}</p>}
       <p>{dayjs(createdAt).format('MMM YYYY')}</p>
+      <EditDetails />
     </>
   );
 };
