@@ -9,13 +9,13 @@ import {
 } from '../types';
 import Router from 'next/router';
 
+const API_URL =
+  'https://asia-southeast2-shelf-webapp-de58d.cloudfunctions.net/api';
+
 export const loginUser = (userData) => (dispatch) => {
   dispatch({ type: LOADING_UI });
   axios
-    .post(
-      'https://asia-southeast2-shelf-webapp-de58d.cloudfunctions.net/api/login',
-      userData
-    )
+    .post(API_URL + '/login', userData)
     .then((res) => {
       setAuthorizationHeader(res.data.token);
       dispatch(getUserData());
@@ -31,15 +31,13 @@ export const logoutUser = () => (dispatch) => {
   localStorage.removeItem('FBIdToken');
   delete axios.defaults.headers.common['Authorization'];
   dispatch({ type: SET_UNAUTHENTICATED });
-  Router.reload(); // Hard Code To be fixed :-(
+  // Router.reload(); // Hard Code To be fixed :-(
 };
 
 export const getUserData = () => (dispatch) => {
   dispatch({ type: LOADING_USER });
   axios
-    .get(
-      'https://asia-southeast2-shelf-webapp-de58d.cloudfunctions.net/api/user'
-    )
+    .get(API_URL + '/user')
     .then((res) => {
       dispatch({
         type: SET_USER,
@@ -52,10 +50,7 @@ export const getUserData = () => (dispatch) => {
 export const signupUser = (newUserData) => (dispatch) => {
   dispatch({ type: LOADING_UI });
   axios
-    .post(
-      'https://asia-southeast2-shelf-webapp-de58d.cloudfunctions.net/api/signup',
-      newUserData
-    )
+    .post(API_URL + '/signup', newUserData)
     .then((res) => {
       setAuthorizationHeader(res.data.token);
       dispatch(getUserData());
@@ -65,6 +60,16 @@ export const signupUser = (newUserData) => (dispatch) => {
     .catch((err) => {
       dispatch({ type: SET_ERRORS, payload: err.response.data });
     });
+};
+
+export const uploadImage = (formData) => (dispatch) => {
+  dispatch({ type: LOADING_USER });
+  axios
+    .post(API_URL + '/user/image', formData)
+    .then(() => {
+      dispatch(getUserData());
+    })
+    .catch((err) => console.log('why', err));
 };
 
 const setAuthorizationHeader = (token) => {

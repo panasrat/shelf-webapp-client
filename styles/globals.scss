@@ -75,3 +75,12 @@ $custom-colors: map-merge(
     background-color: $colorValue !important;
   }
 }
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.hover-peach:hover {
+  color: $theme-peach;
+  transition: color 250ms;
+}
