@@ -74,7 +74,6 @@ export const uploadImage = (formData) => (dispatch) => {
 
 export const editUserDetails = (userDetails) => (dispatch) => {
   dispatch({ type: LOADING_USER });
-  console.log('here!');
   axios
     .post(API_URL + '/user', userDetails)
     .then(() => {

@@ -47,7 +47,6 @@ const EditDetails = ({ credentials, editUserDetails }) => {
       location: location,
       website: website,
     };
-    console.log('wiw');
     editUserDetails(userDetails);
     handleClose();
   };

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
 // import dynamic from 'next/dynamic';
 import styles from '../styles/pages.module.scss';
 
@@ -6,14 +7,18 @@ import Header from '../components/Header';
 import Item from '../components/Item';
 import SideProfile from '../components/SideProfile';
 
-// const DynamicHeader = dynamic(() => import('../components/Header'), {
-//   ssr: false,
-// });
+import { connect } from 'react-redux';
+import { putItemsInStates } from '../redux/actions/dataActions';
 
-const home = ({ items }) => {
+const home = ({ putItemsInStates, items, loading }) => {
+  // const [recentItems, setRecentItems] = useState([])
+
+  useEffect(() => {
+    putItemsInStates(items);
+  }, []);
   // console.log(items);
-  let recentItemsMarkup = items ? (
-    items.map((item) => <Item key={item.itemId} item={item}></Item>)
+  let recentItemsMarkup = !loading ? (
+    items.map((item) => <Item key={item.itemId} item={item} />)
   ) : (
     <p>Loading...</p>
   );
@@ -43,6 +48,12 @@ export const getStaticProps = async () => {
   };
 };
 
-export default home;
+const mapStateToProps = (state) => ({
+  data: state.data,
+});
 
-// export default dynamic(() => Promise.resolve(home), { ssr: false });
+const mapActionToProps = {
+  putItemsInStates,
+};
+
+export default connect(mapStateToProps, mapActionToProps)(home);

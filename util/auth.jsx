@@ -1,6 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import Link from 'next/link';
-import jwtDecode from 'jwt-decode';
 import Router, { useRouter } from 'next/router';
 import { connect } from 'react-redux';
 import { logoutUser } from '../redux/actions/userActions';

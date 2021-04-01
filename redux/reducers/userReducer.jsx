@@ -3,6 +3,8 @@ import {
   SET_AUTHENTICATED,
   SET_UNAUTHENTICATED,
   LOADING_USER,
+  LIKE_ITEM,
+  UNLIKE_ITEM,
 } from '../types';
 
 const initialState = {
@@ -32,6 +34,24 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true,
+      };
+    case LIKE_ITEM:
+      return {
+        ...state,
+        likes: [
+          ...state.likes,
+          {
+            userHandle: state.credentials.handle,
+            itemId: action.payload.itemId,
+          },
+        ],
+      };
+    case UNLIKE_ITEM:
+      return {
+        ...state,
+        likes: state.likes.filter(
+          (like) => like.itemId !== action.payload.itemId
+        ),
       };
 
     default:
