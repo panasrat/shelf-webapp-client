@@ -15,3 +15,4 @@ export const SET_ITEMS = 'SET_ITEMS';
 export const SET_ITEM = 'SET_ITEM';
 export const LIKE_ITEM = 'LIKE_ITEM';
 export const UNLIKE_ITEM = 'UNLIKE_ITEM';
+export const DELETE_ITEM = 'DELETE_ITEM';

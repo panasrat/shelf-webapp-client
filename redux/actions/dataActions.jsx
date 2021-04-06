@@ -1,5 +1,11 @@
 import axios from 'axios';
-import { SET_ITEMS, LOADING_DATA, LIKE_ITEM, UNLIKE_ITEM } from '../types';
+import {
+  SET_ITEMS,
+  LOADING_DATA,
+  LIKE_ITEM,
+  UNLIKE_ITEM,
+  DELETE_ITEM,
+} from '../types';
 
 const API_URL =
   'https://asia-southeast2-shelf-webapp-de58d.cloudfunctions.net/api';
@@ -29,6 +35,17 @@ export const unlikeItem = (itemId) => {
       .get(API_URL + `/item/${itemId}/unlike`)
       .then((res) => {
         dispatch({ type: UNLIKE_ITEM, payload: res.data });
+      })
+      .catch((err) => console.log(err));
+  };
+};
+
+export const deleteItem = (itemId) => {
+  return (dispatch) => {
+    axios
+      .delete(API_URL + `/item/${itemId}`)
+      .then(() => {
+        dispatch({ type: DELETE_ITEM, payload: itemId });
       })
       .catch((err) => console.log(err));
   };

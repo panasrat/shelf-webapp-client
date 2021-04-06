@@ -4,6 +4,8 @@ import styles from './Item.module.scss';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 
+import DeleteItem from '../DeleteItem';
+
 import { connect } from 'react-redux';
 import { likeItem, unlikeItem } from '../../redux//actions/dataActions';
 
@@ -27,6 +29,8 @@ const Item = ({
       : false
   );
 
+  const isUser = userHandle === user.credentials.handle ? true : false;
+
   dayjs.extend(relativeTime);
 
   const handleLike = () => {
@@ -39,6 +43,8 @@ const Item = ({
     unlikeItem(itemId);
   };
 
+  const handleDelete = () => {};
+
   return (
     <div className='card' style={{ width: '18rem', marginBottom: '1rem' }}>
       <img className='card-img-top' src={`${userImage}`} />
@@ -48,15 +54,17 @@ const Item = ({
         <Link href={`/users/${userHandle}`}>
           <a className='card-text'>{userHandle}</a>
         </Link>
+        <br />
         {isLiked ? (
           <button onClick={handleUnlike}>undo like</button>
         ) : (
           <button onClick={handleLike}>do like</button>
         )}
-        <span>{likeCount}</span>
+        <span> {likeCount}</span>
         <p>
           comment: <span>{commentCount}</span>
         </p>
+        {isUser ? <DeleteItem itemId={itemId} /> : null}
       </div>
     </div>
   );

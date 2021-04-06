@@ -1,4 +1,10 @@
-import { SET_ITEMS, LOADING_DATA, LIKE_ITEM, UNLIKE_ITEM } from '../types';
+import {
+  SET_ITEMS,
+  LOADING_DATA,
+  LIKE_ITEM,
+  UNLIKE_ITEM,
+  DELETE_ITEM,
+} from '../types';
 
 const initialState = {
   items: [],
@@ -31,6 +37,13 @@ const dataReducer = (state = initialState, action) => {
       return {
         ...state,
       };
+    case DELETE_ITEM:
+      index = state.items.findIndex((item) => item.itemId === action.payload);
+      state.items.splice(index, 1);
+      return {
+        ...state,
+      };
+
     default:
       return state;
   }
