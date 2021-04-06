@@ -43,8 +43,6 @@ const Item = ({
     unlikeItem(itemId);
   };
 
-  const handleDelete = () => {};
-
   return (
     <div className='card' style={{ width: '18rem', marginBottom: '1rem' }}>
       <img className='card-img-top' src={`${userImage}`} />

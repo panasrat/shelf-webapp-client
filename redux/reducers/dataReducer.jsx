@@ -4,6 +4,8 @@ import {
   LIKE_ITEM,
   UNLIKE_ITEM,
   DELETE_ITEM,
+  POST_ITEM,
+  CLEAR_ITEMS,
 } from '../types';
 
 const initialState = {
@@ -25,6 +27,8 @@ const dataReducer = (state = initialState, action) => {
         items: action.payload,
         loading: false,
       };
+    case CLEAR_ITEMS:
+      return initialState;
     case LIKE_ITEM:
     case UNLIKE_ITEM:
       let index = state.items.findIndex(
@@ -43,7 +47,11 @@ const dataReducer = (state = initialState, action) => {
       return {
         ...state,
       };
-
+    case POST_ITEM:
+      return {
+        ...state,
+        items: [action.payload, ...state.items],
+      };
     default:
       return state;
   }

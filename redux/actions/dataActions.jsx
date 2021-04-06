@@ -5,6 +5,10 @@ import {
   LIKE_ITEM,
   UNLIKE_ITEM,
   DELETE_ITEM,
+  LOADING_UI,
+  SET_ERRORS,
+  CLEAR_ERRORS,
+  POST_ITEM,
 } from '../types';
 
 const API_URL =
@@ -16,6 +20,21 @@ export const putItemsInStates = (items) => (dispatch) => {
     type: SET_ITEMS,
     payload: items,
   });
+};
+
+export const postItem = (newItem) => {
+  return (dispatch) => {
+    dispatch({ type: LOADING_UI });
+    axios
+      .post(API_URL + '/item', newItem)
+      .then((res) => {
+        dispatch({ type: POST_ITEM, payload: res.data });
+        dispatch({ type: CLEAR_ERRORS });
+      })
+      .catch((err) =>
+        dispatch({ type: SET_ERRORS, payload: err.response.data })
+      );
+  };
 };
 
 export const likeItem = (itemId) => {

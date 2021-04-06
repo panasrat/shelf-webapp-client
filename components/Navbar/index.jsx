@@ -4,6 +4,8 @@ import Router from 'next/router';
 import Modal from 'react-modal';
 import styles from './Navbar.module.scss';
 
+import PostItem from '../PostItem';
+
 import { connect } from 'react-redux';
 import { logoutUser } from '../../redux/actions/userActions';
 
@@ -23,7 +25,7 @@ const MenuBar = ({ logoutUser, authenticated }) => {
           <Link href='/'>
             <a className='cursor-pointer hover-peach'>Home</a>
           </Link>
-          <button className='btn btn-primary'>Post</button>
+          <PostItem />
           <button className='btn btn-primary'>Noti</button>
           <button className='btn btn-primary' onClick={handleLogout}>
             Logout

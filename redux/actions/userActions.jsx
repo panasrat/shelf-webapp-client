@@ -6,6 +6,7 @@ import {
   LOADING_UI,
   SET_UNAUTHENTICATED,
   LOADING_USER,
+  CLEAR_ITEMS,
 } from '../types';
 import Router from 'next/router';
 
@@ -31,6 +32,7 @@ export const logoutUser = () => (dispatch) => {
   localStorage.removeItem('FBIdToken');
   delete axios.defaults.headers.common['Authorization'];
   dispatch({ type: SET_UNAUTHENTICATED });
+  dispatch({ type: CLEAR_ITEMS });
   // Router.reload(); // Hard Code To be fixed :-(
 };
 

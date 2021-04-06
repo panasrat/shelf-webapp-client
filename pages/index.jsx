@@ -10,7 +10,7 @@ import SideProfile from '../components/SideProfile';
 import { connect } from 'react-redux';
 import { putItemsInStates } from '../redux/actions/dataActions';
 
-const home = ({ putItemsInStates, items, loading }) => {
+const home = ({ putItemsInStates, items, loading, data }) => {
   // const [recentItems, setRecentItems] = useState([])
 
   useEffect(() => {
@@ -18,7 +18,7 @@ const home = ({ putItemsInStates, items, loading }) => {
   }, []);
   // console.log(items);
   let recentItemsMarkup = !loading ? (
-    items.map((item) => <Item key={item.itemId} item={item} />)
+    data.items.map((item) => <Item key={item.itemId} item={item} />)
   ) : (
     <p>Loading...</p>
   );
