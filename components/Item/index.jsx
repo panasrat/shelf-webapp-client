@@ -20,17 +20,16 @@ const Item = ({
     likeCount,
     commentCount,
   },
-  user,
+  likes,
+  credentials,
   likeItem,
   unlikeItem,
 }) => {
   const [isLiked, setIsLiked] = useState(
-    user.likes && user.likes.find((like) => like.itemId === itemId)
-      ? true
-      : false
+    likes && likes.find((like) => like.itemId === itemId) ? true : false
   );
 
-  const isUser = userHandle === user.credentials.handle ? true : false;
+  const isUser = userHandle === credentials.handle ? true : false;
 
   dayjs.extend(relativeTime);
 
@@ -54,7 +53,9 @@ const Item = ({
           <a className='card-text'>{userHandle}</a>
         </Link>
         <br />
-        {isLiked ? (
+        {(
+          likes && likes.find((like) => like.itemId === itemId) ? true : false
+        ) ? (
           <button onClick={handleUnlike}>undo like</button>
         ) : (
           <button onClick={handleLike}>do like</button>
@@ -73,7 +74,8 @@ const Item = ({
 };
 
 const mapStateToProps = (state) => ({
-  user: state.user,
+  likes: state.user.likes,
+  credentials: state.user.credentials,
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -7,6 +7,7 @@ import {
   DELETE_ITEM,
   POST_ITEM,
   CLEAR_ITEMS,
+  SUBMIT_COMMENT,
 } from '../types';
 
 const initialState = {
@@ -42,7 +43,7 @@ const dataReducer = (state = initialState, action) => {
       );
       state.items[index] = action.payload;
       if (state.item.itemId === action.payload.itemId) {
-        state.item = action.payload;
+        state.item.likeCount = action.payload.likeCount;
       }
       return {
         ...state,
@@ -57,6 +58,14 @@ const dataReducer = (state = initialState, action) => {
       return {
         ...state,
         items: [action.payload, ...state.items],
+      };
+    case SUBMIT_COMMENT:
+      return {
+        ...state,
+        item: {
+          ...state.item,
+          comments: [action.payload, ...state.item.comments],
+        },
       };
     default:
       return state;

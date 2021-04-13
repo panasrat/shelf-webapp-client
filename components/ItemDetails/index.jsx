@@ -6,6 +6,7 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 
 import DeleteItem from '../DeleteItem';
 import Comments from '../Comments';
+import CommentForm from '../CommentForm';
 
 import styles from './ItemDetails.module.scss';
 
@@ -25,18 +26,15 @@ const ItemDetails = ({
     comments,
   },
   UI: { loading },
-  user,
+  likes,
+  credentials,
   likeItem,
   unlikeItem,
 }) => {
   const [open, setOpen] = useState(false);
-  const [isLiked, setIsLiked] = useState(
-    user.likes && user.likes.find((like) => like.itemId === itemId)
-      ? true
-      : false
-  );
+  const [isLiked, setIsLiked] = useState();
 
-  const isUser = userHandle === user.credentials.handle ? true : false;
+  const isUser = userHandle === credentials.handle ? true : false;
 
   dayjs.extend(relativeTime);
 
@@ -52,6 +50,9 @@ const ItemDetails = ({
 
   const handleOpen = () => {
     setOpen(true);
+    setIsLiked(
+      likes && likes.find((like) => like.itemId === itemId) ? true : false
+    );
     getItem(itemId);
   };
 
@@ -78,7 +79,9 @@ const ItemDetails = ({
             <a className='card-text'>{userHandle}</a>
           </Link>
           <br />
-          {isLiked ? (
+          {(
+            likes && likes.find((like) => like.itemId === itemId) ? true : false
+          ) ? (
             <button onClick={handleUnlike}>undo like</button>
           ) : (
             <button onClick={handleLike}>do like</button>
@@ -103,6 +106,9 @@ const ItemDetails = ({
           Close
         </button>
         {detailsMarkup}
+        <h4>Comments</h4>
+        <CommentForm itemId={itemId} />
+        <br />
         <Comments comments={comments} />
       </Modal>
     </>
@@ -110,7 +116,8 @@ const ItemDetails = ({
 };
 
 const mapsStateToProps = (state) => ({
-  user: state.user,
+  likes: state.user.likes,
+  credentials: state.user.credentials,
   item: state.data.item,
   UI: state.UI,
 });

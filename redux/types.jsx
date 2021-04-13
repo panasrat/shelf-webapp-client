@@ -19,3 +19,4 @@ export const LIKE_ITEM = 'LIKE_ITEM';
 export const UNLIKE_ITEM = 'UNLIKE_ITEM';
 export const DELETE_ITEM = 'DELETE_ITEM';
 export const POST_ITEM = 'POST_ITEM';
+export const SUBMIT_COMMENT = 'SUBMIT_COMMENT';
