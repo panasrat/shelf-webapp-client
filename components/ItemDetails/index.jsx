@@ -1,29 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import styles from './Item.module.scss';
+import Modal from 'react-modal';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 
 import DeleteItem from '../DeleteItem';
-import ItemDetails from '../ItemDetails';
 
 import { connect } from 'react-redux';
-import { likeItem, unlikeItem } from '../../redux//actions/dataActions';
+import { getItem, likeItem, unlikeItem } from '../../redux/actions/dataActions';
 
-const Item = ({
-  item: {
-    itemId,
-    body,
-    createdAt,
-    userHandle,
-    userImage,
-    likeCount,
-    commentCount,
-  },
+const ItemDetails = ({
+  itemId,
+  getItem,
+  item: { userImage, createdAt, body, userHandle, likeCount, commentCount },
+  UI: { loading },
   user,
   likeItem,
   unlikeItem,
 }) => {
+  const [open, setOpen] = useState(false);
   const [isLiked, setIsLiked] = useState(
     user.likes && user.likes.find((like) => like.itemId === itemId)
       ? true
@@ -44,7 +39,18 @@ const Item = ({
     unlikeItem(itemId);
   };
 
-  return (
+  const handleOpen = () => {
+    setOpen(true);
+    getItem(itemId);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const detailsMarkup = loading ? (
+    <h1>Loading...</h1>
+  ) : (
     <div className='card' style={{ width: '18rem', marginBottom: '1rem' }}>
       <img className='card-img-top' src={`${userImage}`} />
       <div className='card-body'>
@@ -64,19 +70,35 @@ const Item = ({
           comment: <span>{commentCount}</span>
         </p>
         {isUser ? <DeleteItem itemId={itemId} /> : null}
-        <div>
-          <ItemDetails itemId={itemId} />
-        </div>
       </div>
     </div>
   );
+  return (
+    <>
+      <button className='btn btn-primary' onClick={handleOpen}>
+        Item Details
+      </button>
+      <Modal isOpen={open}>
+        <h1>Details</h1>
+        <button className='btn btn-primary' onClick={handleClose}>
+          Close
+        </button>
+        {detailsMarkup}
+      </Modal>
+    </>
+  );
 };
 
-const mapStateToProps = (state) => ({
+const mapsStateToProps = (state) => ({
   user: state.user,
+  item: state.data.item,
+  UI: state.UI,
 });
 
 const mapDispatchToProps = (dispatch) => ({
+  getItem: (itemId) => {
+    dispatch(getItem(itemId));
+  },
   likeItem: (itemId) => {
     dispatch(likeItem(itemId));
   },
@@ -85,4 +107,4 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Item);
+export default connect(mapsStateToProps, mapDispatchToProps)(ItemDetails);

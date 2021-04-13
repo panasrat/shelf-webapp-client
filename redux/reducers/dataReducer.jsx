@@ -1,5 +1,6 @@
 import {
   SET_ITEMS,
+  SET_ITEM,
   LOADING_DATA,
   LIKE_ITEM,
   UNLIKE_ITEM,
@@ -27,6 +28,11 @@ const dataReducer = (state = initialState, action) => {
         items: action.payload,
         loading: false,
       };
+    case SET_ITEM:
+      return {
+        ...state,
+        item: action.payload,
+      };
     case CLEAR_ITEMS:
       return initialState;
     case LIKE_ITEM:
@@ -35,9 +41,9 @@ const dataReducer = (state = initialState, action) => {
         (item) => item.itemId === action.payload.itemId
       );
       state.items[index] = action.payload;
-      // if (state.item.itemId === action.payload.itemId) {
-      //   state.item = action.payload;
-      // }
+      if (state.item.itemId === action.payload.itemId) {
+        state.item = action.payload;
+      }
       return {
         ...state,
       };

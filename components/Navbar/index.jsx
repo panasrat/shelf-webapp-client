@@ -1,7 +1,5 @@
 import React from 'react';
 import Link from 'next/link';
-import Router from 'next/router';
-import Modal from 'react-modal';
 import styles from './Navbar.module.scss';
 
 import PostItem from '../PostItem';

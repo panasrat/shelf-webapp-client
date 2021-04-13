@@ -9,6 +9,8 @@ import {
   SET_ERRORS,
   CLEAR_ERRORS,
   POST_ITEM,
+  SET_ITEM,
+  STOP_LOADING_UI,
 } from '../types';
 
 const API_URL =
@@ -20,6 +22,19 @@ export const putItemsInStates = (items) => (dispatch) => {
     type: SET_ITEMS,
     payload: items,
   });
+};
+
+export const getItem = (itemId) => {
+  return (dispatch) => {
+    dispatch({ type: LOADING_UI });
+    axios
+      .get(API_URL + `/item/${itemId}`)
+      .then((res) => {
+        dispatch({ type: SET_ITEM, payload: res.data });
+        dispatch({ type: STOP_LOADING_UI });
+      })
+      .catch((err) => console.log(err));
+  };
 };
 
 export const postItem = (newItem) => {
