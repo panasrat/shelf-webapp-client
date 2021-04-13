@@ -46,7 +46,7 @@ const Item = ({
 
   return (
     <div className='card' style={{ width: '18rem', marginBottom: '1rem' }}>
-      <img className='card-img-top' src={`${userImage}`} />
+      <img className='card-img-top' src={userImage} />
       <div className='card-body'>
         <p className='card-subtitle text-muted'>{dayjs(createdAt).fromNow()}</p>
         <p className='card-text'>{body}</p>

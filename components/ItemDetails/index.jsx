@@ -5,6 +5,9 @@ import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 
 import DeleteItem from '../DeleteItem';
+import Comments from '../Comments';
+
+import styles from './ItemDetails.module.scss';
 
 import { connect } from 'react-redux';
 import { getItem, likeItem, unlikeItem } from '../../redux/actions/dataActions';
@@ -12,7 +15,15 @@ import { getItem, likeItem, unlikeItem } from '../../redux/actions/dataActions';
 const ItemDetails = ({
   itemId,
   getItem,
-  item: { userImage, createdAt, body, userHandle, likeCount, commentCount },
+  item: {
+    userImage,
+    createdAt,
+    body,
+    userHandle,
+    likeCount,
+    commentCount,
+    comments,
+  },
   UI: { loading },
   user,
   likeItem,
@@ -51,25 +62,33 @@ const ItemDetails = ({
   const detailsMarkup = loading ? (
     <h1>Loading...</h1>
   ) : (
-    <div className='card' style={{ width: '18rem', marginBottom: '1rem' }}>
-      <img className='card-img-top' src={`${userImage}`} />
-      <div className='card-body'>
-        <p className='card-subtitle text-muted'>{dayjs(createdAt).fromNow()}</p>
-        <p className='card-text'>{body}</p>
-        <Link href={`/users/${userHandle}`}>
-          <a className='card-text'>{userHandle}</a>
-        </Link>
-        <br />
-        {isLiked ? (
-          <button onClick={handleUnlike}>undo like</button>
-        ) : (
-          <button onClick={handleLike}>do like</button>
-        )}
-        <span> {likeCount}</span>
-        <p>
-          comment: <span>{commentCount}</span>
-        </p>
-        {isUser ? <DeleteItem itemId={itemId} /> : null}
+    <div className='d-flex' style={{ marginBottom: '1rem' }}>
+      <div className={styles.cardHorizontal}>
+        <img
+          className='card-img-top'
+          src={userImage}
+          style={{ width: '300px', height: '300px' }}
+        />
+        <div className='card-body'>
+          <p className='card-subtitle text-muted'>
+            {dayjs(createdAt).fromNow()}
+          </p>
+          <p className='card-text'>{body}</p>
+          <Link href={`/users/${userHandle}`}>
+            <a className='card-text'>{userHandle}</a>
+          </Link>
+          <br />
+          {isLiked ? (
+            <button onClick={handleUnlike}>undo like</button>
+          ) : (
+            <button onClick={handleLike}>do like</button>
+          )}
+          <span> {likeCount}</span>
+          <p>
+            comment: <span>{commentCount}</span>
+          </p>
+          {isUser ? <DeleteItem itemId={itemId} /> : null}
+        </div>
       </div>
     </div>
   );
@@ -84,6 +103,7 @@ const ItemDetails = ({
           Close
         </button>
         {detailsMarkup}
+        <Comments comments={comments} />
       </Modal>
     </>
   );
