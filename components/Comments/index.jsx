@@ -3,12 +3,13 @@ import Link from 'next/link';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 
-const Comments = ({ comments }) => {
+const Comments = ({ comments, credentials }) => {
   dayjs.extend(relativeTime);
 
   const commentsMarkup = comments ? (
     comments.map((comment) => {
       const { body, createdAt, userImage, userHandle } = comment;
+      const isUser = userHandle === credentials.handle ? true : false;
       return (
         <div key={createdAt}>
           <div className='d-flex'>
@@ -19,6 +20,7 @@ const Comments = ({ comments }) => {
               </Link>
               <p>{body}</p>
               <p>{dayjs(createdAt).fromNow()}</p>
+              {isUser ? <button disabled={true}>Delete Comment</button> : null}
             </div>
           </div>
           <br />

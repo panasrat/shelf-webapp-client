@@ -13,7 +13,7 @@ export const AuthRoute = ({ children, authenticated, logoutUser }) => {
     const checkAuthenticated = async () => {
       if (authenticated && FBIdToken) {
         setToken(FBIdToken);
-        Router.push('/');
+        // Router.push('/');
       }
     };
     checkAuthenticated();

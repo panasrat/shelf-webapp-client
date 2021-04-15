@@ -60,12 +60,15 @@ const dataReducer = (state = initialState, action) => {
         items: [action.payload, ...state.items],
       };
     case SUBMIT_COMMENT:
+      // console.log('before', state.items[index]);
+      state.items[index] = action.payload;
+      // console.log('after', state.items[index].commentCount);
+      if (state.item.itemId === action.payload.itemId) {
+        state.item.commentCount = action.payload.commentCount;
+        state.item.comments.unshift(action.payload);
+      }
       return {
         ...state,
-        item: {
-          ...state.item,
-          comments: [action.payload, ...state.item.comments],
-        },
       };
     default:
       return state;

@@ -100,6 +100,20 @@ export const deleteItem = (itemId) => {
   };
 };
 
+// export const getUserData = (userhandle) => {
+//   return (dispatch) => {
+//     dispatch({ type: LOADING_DATA });
+//     axios
+//       .get(API_URL + `/user/${userhandle}`)
+//       .then((res) => {
+//         dispatch({ type: SET_ITEMS, payload: res.data.items });
+//       })
+//       .catch((err) => {
+//         dispatch({ type: SET_ITEMS, payload: null });
+//       });
+//   };
+// };
+
 export const clearErrors = () => {
   return (dispatch) => {
     dispatch({ type: CLEAR_ERRORS });

@@ -1,7 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Link from 'next/link';
-// import dynamic from 'next/dynamic';
-import styles from '../styles/pages.module.scss';
 
 import Header from '../components/Header';
 import Item from '../components/Item';
@@ -10,14 +7,14 @@ import SideProfile from '../components/SideProfile';
 import { connect } from 'react-redux';
 import { putItemsInStates } from '../redux/actions/dataActions';
 
-const home = ({ putItemsInStates, items, loading, data }) => {
+const home = ({ putItemsInStates, items, data }) => {
   // const [recentItems, setRecentItems] = useState([])
 
   useEffect(() => {
     putItemsInStates(items);
   }, []);
   // console.log(items);
-  let recentItemsMarkup = !loading ? (
+  let recentItemsMarkup = !data.loading ? (
     data.items.map((item) => <Item key={item.itemId} item={item} />)
   ) : (
     <p>Loading...</p>

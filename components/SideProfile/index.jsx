@@ -33,7 +33,7 @@ const SideProfile = ({
         <h2 className='cursor-pointer hover-peach'>@{handle}</h2>
       </Link>
       <div style={{ width: '300px' }}>
-        <img src={imageUrl} style={{ width: '100% ' }} />
+        <img src={imageUrl} style={{ width: '100%' }} />
         <input
           type='file'
           id='imageInput'

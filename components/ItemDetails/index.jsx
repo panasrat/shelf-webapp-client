@@ -109,7 +109,7 @@ const ItemDetails = ({
         <h4>Comments</h4>
         <CommentForm itemId={itemId} />
         <br />
-        <Comments comments={comments} />
+        <Comments comments={comments} credentials={credentials} />
       </Modal>
     </>
   );

@@ -28,6 +28,7 @@ const Item = ({
   const [isLiked, setIsLiked] = useState(
     likes && likes.find((like) => like.itemId === itemId) ? true : false
   );
+  // const [commentCount, setCommentCount] = useState();
 
   const isUser = userHandle === credentials.handle ? true : false;
 
