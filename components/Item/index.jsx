@@ -5,7 +5,7 @@ import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 
 import DeleteItem from '../DeleteItem';
-import ItemDetails from '../ItemDetails';
+import ItemDetailsButton from '../ItemDetailsButton';
 
 import { connect } from 'react-redux';
 import { likeItem, unlikeItem } from '../../redux//actions/dataActions';
@@ -14,6 +14,8 @@ const Item = ({
   item: {
     itemId,
     body,
+    shelfId,
+    shelfName,
     createdAt,
     userHandle,
     userImage,
@@ -22,6 +24,7 @@ const Item = ({
   },
   likes,
   credentials,
+  shelves,
   likeItem,
   unlikeItem,
 }) => {
@@ -44,11 +47,14 @@ const Item = ({
     unlikeItem(itemId);
   };
 
+  // const shelf = shelves.find((obj) => obj.shelfId === shelfId);
+
   return (
     <div className='card' style={{ width: '18rem', marginBottom: '1rem' }}>
       <img className='card-img-top' src={userImage} />
       <div className='card-body'>
         <p className='card-subtitle text-muted'>{dayjs(createdAt).fromNow()}</p>
+        <p className='card-subtitle text-muted'>Add To {shelfName}</p>
         <p className='card-text'>{body}</p>
         <Link href={`/users/${userHandle}`}>
           <a className='card-text'>{userHandle}</a>
@@ -67,7 +73,7 @@ const Item = ({
         </p>
         {isUser ? <DeleteItem itemId={itemId} /> : null}
         <div>
-          <ItemDetails itemId={itemId} />
+          <ItemDetailsButton itemId={itemId} />
         </div>
       </div>
     </div>
@@ -77,6 +83,7 @@ const Item = ({
 const mapStateToProps = (state) => ({
   likes: state.user.likes,
   credentials: state.user.credentials,
+  shelves: state.user.shelves,
 });
 
 const mapDispatchToProps = (dispatch) => ({

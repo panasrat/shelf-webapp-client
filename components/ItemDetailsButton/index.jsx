@@ -8,12 +8,18 @@ import DeleteItem from '../DeleteItem';
 import Comments from '../Comments';
 import CommentForm from '../CommentForm';
 
-import styles from './ItemDetails.module.scss';
+import styles from './ItemDetailsButton.module.scss';
 
 import { connect } from 'react-redux';
-import { getItem, likeItem, unlikeItem } from '../../redux/actions/dataActions';
+import {
+  getItem,
+  likeItem,
+  unlikeItem,
+  clearItem,
+} from '../../redux/actions/dataActions';
 
-const ItemDetails = ({
+const ItemDetailsButton = ({
+  fromUrl,
   itemId,
   getItem,
   item: {
@@ -30,6 +36,7 @@ const ItemDetails = ({
   credentials,
   likeItem,
   unlikeItem,
+  clearItem,
 }) => {
   const [open, setOpen] = useState(false);
   const [isLiked, setIsLiked] = useState();
@@ -58,6 +65,7 @@ const ItemDetails = ({
 
   const handleClose = () => {
     setOpen(false);
+    clearItem();
   };
 
   const detailsMarkup = loading ? (
@@ -115,7 +123,7 @@ const ItemDetails = ({
   );
 };
 
-const mapsStateToProps = (state) => ({
+const mapStateToProps = (state) => ({
   likes: state.user.likes,
   credentials: state.user.credentials,
   item: state.data.item,
@@ -132,6 +140,9 @@ const mapDispatchToProps = (dispatch) => ({
   unlikeItem: (itemId) => {
     dispatch(unlikeItem(itemId));
   },
+  clearItem: () => {
+    dispatch(clearItem());
+  },
 });
 
-export default connect(mapsStateToProps, mapDispatchToProps)(ItemDetails);
+export default connect(mapStateToProps, mapDispatchToProps)(ItemDetailsButton);

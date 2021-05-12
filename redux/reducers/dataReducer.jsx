@@ -8,11 +8,14 @@ import {
   POST_ITEM,
   CLEAR_ITEMS,
   SUBMIT_COMMENT,
+  CLEAR_ITEM,
+  SET_SHELF,
 } from '../types';
 
 const initialState = {
   items: [],
   item: {},
+  shelf: {},
   loading: false,
 };
 
@@ -36,6 +39,11 @@ const dataReducer = (state = initialState, action) => {
       };
     case CLEAR_ITEMS:
       return initialState;
+    case CLEAR_ITEM:
+      return {
+        ...state,
+        item: {},
+      };
     case LIKE_ITEM:
     case UNLIKE_ITEM:
       let index = state.items.findIndex(
@@ -70,6 +78,12 @@ const dataReducer = (state = initialState, action) => {
       return {
         ...state,
       };
+    case SET_SHELF:
+      return {
+        ...state,
+        shelf: action.payload,
+      };
+
     default:
       return state;
   }

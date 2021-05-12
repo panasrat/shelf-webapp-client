@@ -8,11 +8,7 @@ import { connect } from 'react-redux';
 import { logoutUser, uploadImage } from '../../redux/actions/userActions';
 
 const SideProfile = ({
-  user: {
-    authenticated,
-    loading,
-    credentials: { bio, handle, imageUrl, createdAt, location, website },
-  },
+  credentials: { bio, handle, imageUrl, createdAt, location, website },
   uploadImage,
 }) => {
   const handleImageChange = (event) => {
@@ -54,7 +50,7 @@ const SideProfile = ({
 };
 
 const mapStateToProps = (state) => ({
-  user: state.user,
+  credentials: state.user.credentials,
 });
 
 const mapActionsToProp = { logoutUser, uploadImage };

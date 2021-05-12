@@ -12,6 +12,8 @@ import {
   SET_ITEM,
   STOP_LOADING_UI,
   SUBMIT_COMMENT,
+  CLEAR_ITEM,
+  SET_SHELF,
 } from '../types';
 
 const API_URL =
@@ -32,6 +34,25 @@ export const getItem = (itemId) => {
       .get(API_URL + `/item/${itemId}`)
       .then((res) => {
         dispatch({ type: SET_ITEM, payload: res.data });
+        dispatch({ type: STOP_LOADING_UI });
+      })
+      .catch((err) => console.log(err));
+  };
+};
+
+export const clearItem = () => {
+  return (dispatch) => {
+    dispatch({ type: CLEAR_ITEM });
+  };
+};
+
+export const getShelf = (shelfId) => {
+  return (dispatch) => {
+    dispatch({ type: LOADING_UI });
+    axios
+      .get(API_URL + `/shelf/${shelfId}`)
+      .then((res) => {
+        dispatch({ type: SET_SHELF, payload: res.data });
         dispatch({ type: STOP_LOADING_UI });
       })
       .catch((err) => console.log(err));

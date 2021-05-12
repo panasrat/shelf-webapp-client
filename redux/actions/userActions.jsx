@@ -7,6 +7,7 @@ import {
   SET_UNAUTHENTICATED,
   LOADING_USER,
   CLEAR_ITEMS,
+  ADD_SHELF,
 } from '../types';
 import Router from 'next/router';
 
@@ -82,6 +83,30 @@ export const editUserDetails = (userDetails) => (dispatch) => {
       dispatch(getUserData());
     })
     .catch((err) => console.log(err));
+};
+
+export const putShelvesInStates = (shelves) => (dispatch) => {
+  dispatch({ type: LOADING_DATA });
+  dispatch({
+    type: SET_SHELVES,
+    payload: shelves,
+  });
+};
+
+export const addShelf = (newShelf) => {
+  return (dispatch) => {
+    dispatch({ type: LOADING_UI });
+    console.log('here');
+    axios
+      .post(API_URL + '/shelf', newShelf)
+      .then((res) => {
+        console.log('new', res.data);
+        dispatch({ type: ADD_SHELF, payload: res.data });
+      })
+      .catch((err) =>
+        dispatch({ type: SET_ERRORS, payload: err.response.data })
+      );
+  };
 };
 
 const setAuthorizationHeader = (token) => {

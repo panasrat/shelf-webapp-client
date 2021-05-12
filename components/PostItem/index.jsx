@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 
+import Select from 'react-select';
+
 import { connect } from 'react-redux';
 import { postItem } from '../../redux/actions/dataActions';
 
-const PostItem = ({ postItem, UI }) => {
+const PostItem = ({ postItem, UI, shelves }) => {
   const [open, setOpen] = useState(false);
   const [post, setPost] = useState('');
+  const [options, setOptions] = useState([]);
+  const [shelfObj, setShelfObj] = useState({});
   const [errors, setErrors] = useState({});
+
+  let shelvesOptions = [];
 
   useEffect(() => {
     if (UI.errors) {
@@ -17,6 +23,13 @@ const PostItem = ({ postItem, UI }) => {
 
   const handleOpen = () => {
     setOpen(true);
+    shelves.map((shelf) =>
+      shelvesOptions.push({
+        value: shelf.shelfId,
+        label: shelf.shelfName,
+      })
+    );
+    setOptions(shelvesOptions);
   };
 
   const handleClose = () => {
@@ -27,6 +40,8 @@ const PostItem = ({ postItem, UI }) => {
     event.preventDefault();
     const newPost = {
       body: post,
+      shelfId: shelfObj.value,
+      shelfName: shelfObj.label,
     };
     postItem(newPost);
     setPost('');
@@ -36,6 +51,11 @@ const PostItem = ({ postItem, UI }) => {
   const handleChangePost = (event) => {
     setPost(event.target.value);
   };
+
+  // const handleChangeShelf = (event) => {
+  //   setShelfId(event.value);
+  // };
+
   return (
     <>
       <button className='btn btn-primary' onClick={handleOpen}>
@@ -52,6 +72,12 @@ const PostItem = ({ postItem, UI }) => {
               value={post}
             />
           </div>
+          <Select
+            placeholder='Select Shelf...'
+            options={options}
+            // value={options.find((obj) => obj.value === shelfId)}
+            onChange={setShelfObj}
+          />
           <div>
             <button
               className='btn btn-primary'
@@ -72,6 +98,7 @@ const PostItem = ({ postItem, UI }) => {
 
 const mapStateToProps = (state) => ({
   UI: state.UI,
+  shelves: state.user.shelves,
 });
 
 const mapDispatchToProps = (dispatch) => ({

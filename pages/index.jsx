@@ -13,7 +13,6 @@ const home = ({ putItemsInStates, items, data }) => {
   useEffect(() => {
     putItemsInStates(items);
   }, []);
-  // console.log(items);
   let recentItemsMarkup = !data.loading ? (
     data.items.map((item) => <Item key={item.itemId} item={item} />)
   ) : (
@@ -23,11 +22,16 @@ const home = ({ putItemsInStates, items, data }) => {
   return (
     <>
       <Header title='Home Page' />
-      <main>
-        <div className='d-flex bg-lightgrey' style={{ padding: '20px 100px' }}>
-          <div className='col-8 bg-pink'>{recentItemsMarkup}</div>
-          <div className='col-4 bg-brown text-white'>
+      <main style={{ zIndex: '0' }}>
+        <div
+          className='d-flex justify-content-between'
+          style={{ padding: '30px 200px' }}
+        >
+          <div className='bg-brown text-white shadow-box' style={{}}>
             <SideProfile />
+          </div>
+          <div className='col-7 bg-pink shadow-box' style={{}}>
+            {recentItemsMarkup}
           </div>
         </div>
       </main>

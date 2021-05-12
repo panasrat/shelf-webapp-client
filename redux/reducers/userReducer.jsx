@@ -2,6 +2,7 @@ import {
   SET_USER,
   SET_AUTHENTICATED,
   SET_UNAUTHENTICATED,
+  ADD_SHELF,
   LOADING_USER,
   LIKE_ITEM,
   UNLIKE_ITEM,
@@ -13,6 +14,7 @@ const initialState = {
   credentials: {},
   likes: [],
   notifications: [],
+  shelves: [],
 };
 
 const userReducer = (state = initialState, action) => {
@@ -53,7 +55,11 @@ const userReducer = (state = initialState, action) => {
           (like) => like.itemId !== action.payload.itemId
         ),
       };
-
+    case ADD_SHELF:
+      return {
+        ...state,
+        shelves: [action.payload, ...state.shelves],
+      };
     default:
       return state;
   }
