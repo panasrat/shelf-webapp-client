@@ -26,13 +26,13 @@ const user = ({
 }) => {
   useEffect(() => {
     putItemsInStates(userItems);
+    console.log('am i run');
   }, []);
 
-  let recentItemsMarkup = !data.loading ? (
-    data.items.map((item) => <Item key={item.itemId} item={item} />)
-  ) : (
-    <p>Loading...</p>
-  );
+  let recentItemsMarkup =
+    handle === userDetails.handle
+      ? data.items.map((item) => <Item key={item.itemId} item={item} />)
+      : userItems.map((item) => <Item key={item.itemId} item={item} />);
 
   let recentShelvesMarkup =
     handle === userDetails.handle
@@ -49,7 +49,7 @@ const user = ({
           style={{ padding: '30px 200px' }}
         >
           <div className='bg-brown text-white shadow-box'>
-            <AddShelf />
+            {handle === userDetails.handle ? <AddShelf /> : null}
             {recentShelvesMarkup}
           </div>
           <div className='col-7 bg-pink shadow-box'>{recentItemsMarkup}</div>

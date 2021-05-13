@@ -19,9 +19,7 @@ const Shelf = ({
 
   const detailsMarkup = loading ? (
     <h1>Loading...</h1>
-  ) : !items ? (
-    console.log('null', items)
-  ) : (
+  ) : !items ? null : (
     items.map((item) => <Item key={item.itemId} item={item} />)
   );
 

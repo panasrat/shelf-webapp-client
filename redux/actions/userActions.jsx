@@ -34,7 +34,7 @@ export const logoutUser = () => (dispatch) => {
   delete axios.defaults.headers.common['Authorization'];
   dispatch({ type: SET_UNAUTHENTICATED });
   dispatch({ type: CLEAR_ITEMS });
-  // Router.reload(); // Hard Code To be fixed :-(
+  Router.push('/login');
 };
 
 export const getUserData = () => (dispatch) => {

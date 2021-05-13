@@ -1,12 +1,17 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import Link from 'next/link';
-import Router, { useRouter } from 'next/router';
+import { useRouter } from 'next/router';
+import Modal from 'react-modal';
+
+import Header from '../components/Header';
+
 import { connect } from 'react-redux';
 import { logoutUser } from '../redux/actions/userActions';
 
 export const AuthRoute = ({ children, authenticated, logoutUser }) => {
   const router = useRouter();
   const [token, setToken] = useState('');
+  const [open, setOpen] = useState(true);
 
   useEffect(() => {
     const FBIdToken = localStorage.FBIdToken;
@@ -26,9 +31,14 @@ export const AuthRoute = ({ children, authenticated, logoutUser }) => {
     router.pathname !== '/signup'
   ) {
     return (
-      <h1>
-        You are not login yet. Please Login <Link href='/login'>here</Link>
-      </h1>
+      <>
+        <Header />
+        <Modal isOpen={open}>
+          <h1>
+            You are not login yet. Please Login <Link href='/login'>here</Link>
+          </h1>
+        </Modal>
+      </>
     );
   }
 

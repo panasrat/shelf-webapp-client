@@ -23,6 +23,8 @@ const PostItem = ({ postItem, UI, shelves }) => {
 
   const handleOpen = () => {
     setOpen(true);
+    setPost('');
+    setShelfObj(null);
     shelves.map((shelf) =>
       shelvesOptions.push({
         value: shelf.shelfId,
@@ -82,7 +84,7 @@ const PostItem = ({ postItem, UI, shelves }) => {
             <button
               className='btn btn-primary'
               type='submit'
-              disabled={post ? false : true}
+              disabled={post && shelfObj ? false : true}
             >
               Post
             </button>

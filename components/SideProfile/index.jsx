@@ -25,7 +25,7 @@ const SideProfile = ({
 
   return (
     <>
-      <Link href={`users/${handle}`}>
+      <Link href={`/users/${handle}`}>
         <h2 className='cursor-pointer hover-peach'>@{handle}</h2>
       </Link>
       <div style={{ width: '300px' }}>

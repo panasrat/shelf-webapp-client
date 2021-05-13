@@ -11,9 +11,9 @@ if (typeof window !== 'undefined') {
 
 const MyApp = ({ Component, pageProps }) => (
   <Provider store={store}>
-    {/* <AuthRouteRedux> */}
-    <Component {...pageProps} />
-    {/* </AuthRouteRedux> */}
+    <AuthRouteRedux>
+      <Component {...pageProps} />
+    </AuthRouteRedux>
   </Provider>
 );
 
