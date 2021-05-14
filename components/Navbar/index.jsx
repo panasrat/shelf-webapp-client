@@ -30,29 +30,18 @@ const MenuBar = ({ logoutUser, authenticated, myHandle }) => {
   };
   return (
     <div className='d-flex justify-content-between' style={{ width: '40%' }}>
-      {authenticated ? (
-        <>
-          <Link href='/'>
-            <a className='cursor-pointer hover-peach'>Home</a>
-          </Link>
-          <Link href={`/users/${myHandle}`}>
-            <a className='cursor-pointer hover-peach'>Me</a>
-          </Link>
-          <PostItem />
-          <button className='btn btn-primary' onClick={handleLogout}>
-            Logout
-          </button>
-        </>
-      ) : (
-        <>
-          <Link href='/login'>
-            <a>Login</a>
-          </Link>
-          <Link href='/signup'>
-            <a>Signup</a>
-          </Link>
-        </>
-      )}
+      <>
+        <Link href='/'>
+          <a className='cursor-pointer hover-peach'>Home</a>
+        </Link>
+        <Link href={`/users/${myHandle}`}>
+          <a className='cursor-pointer hover-peach'>Me</a>
+        </Link>
+        <PostItem />
+        <button className='btn btn-primary' onClick={handleLogout}>
+          Logout
+        </button>
+      </>
     </div>
   );
 };
@@ -88,20 +77,20 @@ const Navbar = ({ logoutUser, authenticated, handle }) => {
   return (
     <>
       <div
-        className={`d-flex bg-white text-white justify-content-between align-items-center ${styles.navbar}`}
+        className={`d-flex bg-white text-white justify-content-between align-items-center position-relative fixed-top ${styles.navbar} ${styles.shadow}`}
       >
         <Logo />
-        <MenuBar
-          logoutUser={logoutUser}
-          authenticated={authenticated}
-          myHandle={handle}
-        />
-        <Drop />
+        {authenticated ? (
+          <>
+            <MenuBar
+              logoutUser={logoutUser}
+              authenticated={authenticated}
+              myHandle={handle}
+            />
+            <Drop />
+          </>
+        ) : null}
       </div>
-      {/* <div
-        className='bg-white'
-        style={{ width: '100%', height: '5px' }}
-      ></div> */}
     </>
   );
 };

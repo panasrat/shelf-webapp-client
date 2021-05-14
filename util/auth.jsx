@@ -8,6 +8,17 @@ import Header from '../components/Header';
 import { connect } from 'react-redux';
 import { logoutUser } from '../redux/actions/userActions';
 
+const customStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+  },
+};
+
 export const AuthRoute = ({ children, authenticated, logoutUser }) => {
   const router = useRouter();
   const [token, setToken] = useState('');
@@ -24,20 +35,31 @@ export const AuthRoute = ({ children, authenticated, logoutUser }) => {
     checkAuthenticated();
   }, []);
 
-  if (
-    !authenticated &&
-    !token &&
-    router.pathname !== '/login' &&
-    router.pathname !== '/signup'
-  ) {
+  if (!authenticated && !token && router.pathname !== '/login') {
     return (
       <>
         <Header />
-        <Modal isOpen={open}>
-          <h1>
-            You are not login yet. Please Login <Link href='/login'>here</Link>
-          </h1>
-        </Modal>
+        <div className='nav-offset-m'>
+          <Modal isOpen={open} style={customStyles}>
+            <div className='d-flex flex-column align-items-center'>
+              <picture>
+                <img
+                  className=''
+                  alt='shelf'
+                  src='/icons/logo-brown.svg'
+                  style={{ width: '100px' }}
+                />
+              </picture>
+              <div
+                className='text-brown text-center'
+                style={{ marginTop: '1rem' }}
+              >
+                You are not login yet. <br />
+                Please Login <Link href='/login'>here</Link>
+              </div>
+            </div>
+          </Modal>
+        </div>
       </>
     );
   }

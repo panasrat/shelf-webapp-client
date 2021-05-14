@@ -37,7 +37,10 @@ const Login = ({ UI, loginUser }) => {
   };
 
   return (
-    <div className='bg-pink' style={{ padding: '50px' }}>
+    <div
+      className='bg-white shadow-drop border-smooth'
+      style={{ padding: '30px', width: '400px' }}
+    >
       <form noValidate onSubmit={handleSubmit}>
         <div className='form-group'>
           <label>Email address</label>
@@ -75,7 +78,7 @@ const Login = ({ UI, loginUser }) => {
           {errors.general}
         </small>
         <small>
-          Don't have an account? Sign up <Link href='/signup'>here</Link>
+          Don't have an account? Sign up <a href='#signup'>here</a>
         </small>
       </form>
     </div>

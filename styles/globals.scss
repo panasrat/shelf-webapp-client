@@ -2,6 +2,7 @@
 
 html,
 body {
+  scroll-behavior: smooth;
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
@@ -76,6 +77,10 @@ $custom-colors: map-merge(
   }
 }
 
+.nav-offset-m {
+  margin-top: $navbar-height;
+}
+
 .cursor-pointer {
   cursor: pointer;
 }
@@ -93,7 +98,6 @@ $custom-colors: map-merge(
 }
 
 .shadow-drop {
-  z-index: 1;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
@@ -102,4 +106,13 @@ $custom-colors: map-merge(
     0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
     0 10px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
     0 0px 80px rgba(0, 0, 0, 0.12);
+}
+
+.center-absolute {
+  left: 50%;
+  transform: translate(-50%);
+}
+
+.border-smooth {
+  border-radius: 10px;
 }

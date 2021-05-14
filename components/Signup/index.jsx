@@ -53,7 +53,10 @@ const Signup = ({ UI, signupUser }) => {
   };
 
   return (
-    <div className='bg-pink' style={{ padding: '50px' }}>
+    <div
+      className='bg-white shadow-drop border-smooth'
+      style={{ padding: '30px', width: '400px' }}
+    >
       <form noValidate onSubmit={handleSubmit}>
         <div className='form-group'>
           <label>Email address</label>
