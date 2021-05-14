@@ -60,9 +60,12 @@ const PostItem = ({ postItem, UI, shelves }) => {
 
   return (
     <>
-      <button className='btn btn-primary' onClick={handleOpen}>
-        Post
-      </button>
+      <div
+        className='d-flex align-items-center hover-light cursor-pointer'
+        onClick={handleOpen}
+      >
+        <img alt='shelf' src='/icons/post.svg' style={{ width: '28px' }} />
+      </div>
       <Modal isOpen={open}>
         <h1>Post New Item</h1>
         <form onSubmit={handlePost}>

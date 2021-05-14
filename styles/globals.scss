@@ -85,10 +85,21 @@ $custom-colors: map-merge(
   cursor: pointer;
 }
 
+.cursor-not-allowed {
+  cursor: not-allowed;
+}
+
 .hover-darken {
   transition: filter 300ms;
   &:hover {
     filter: brightness(0.8);
+  }
+}
+
+.hover-light {
+  transition: filter 300ms;
+  &:hover {
+    filter: brightness(1.5);
   }
 }
 

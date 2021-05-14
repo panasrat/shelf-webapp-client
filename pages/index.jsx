@@ -22,7 +22,7 @@ const home = ({ putItemsInStates, items, data }) => {
   return (
     <>
       <Header title='Home Page' />
-      <main style={{ zIndex: '0' }}>
+      <main className='nav-offset-m' style={{ zIndex: '0' }}>
         <div
           className='d-flex justify-content-between'
           style={{ padding: '30px 200px' }}

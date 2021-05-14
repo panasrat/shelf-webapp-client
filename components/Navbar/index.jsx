@@ -23,30 +23,34 @@ const Logo = () => (
   </div>
 );
 
-const MenuBar = ({ logoutUser, authenticated, myHandle }) => {
-  const handleLogout = (event) => {
-    event.preventDefault();
-    logoutUser();
-  };
+const MenuBar = ({ myHandle }) => {
   return (
     <div className='d-flex justify-content-between' style={{ width: '40%' }}>
       <>
-        <Link href='/'>
-          <a className='cursor-pointer hover-peach'>Home</a>
-        </Link>
         <Link href={`/users/${myHandle}`}>
-          <a className='cursor-pointer hover-peach'>Me</a>
+          <div className='d-flex align-items-center hover-light cursor-pointer'>
+            <img
+              alt='shelf'
+              src='/icons/profile.svg'
+              style={{ width: '30px' }}
+            />
+          </div>
         </Link>
+        <Link href='/'>
+          <div className='d-flex align-items-center hover-light cursor-pointer'>
+            <img alt='shelf' src='/icons/home.svg' style={{ width: '32px' }} />
+          </div>
+        </Link>
+        <div className='d-flex align-items-center cursor-not-allowed'>
+          <img alt='shelf' src='/icons/search.svg' style={{ width: '30px' }} />
+        </div>
         <PostItem />
-        <button className='btn btn-primary' onClick={handleLogout}>
-          Logout
-        </button>
       </>
     </div>
   );
 };
 
-const Drop = ({ children }) => {
+const Drop = ({ logoutUser }) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -64,30 +68,36 @@ const Drop = ({ children }) => {
           />
         </picture>
       </div>
-      {open ? <DropMenu /> : null}
+      {open ? <DropMenu logoutUser={logoutUser} /> : null}
     </>
   );
 };
 
-const DropMenu = () => (
-  <div className={`bg-white text-brown shadow-box ${styles.dropdown}`}>Hi</div>
-);
+const DropMenu = ({ logoutUser }) => {
+  const handleLogout = (event) => {
+    event.preventDefault();
+    logoutUser();
+  };
+  return (
+    <div className={`bg-white text-brown shadow-box ${styles.dropdown}`}>
+      <button className='btn btn-primary' onClick={handleLogout}>
+        Logout
+      </button>
+    </div>
+  );
+};
 
 const Navbar = ({ logoutUser, authenticated, handle }) => {
   return (
     <>
       <div
-        className={`d-flex bg-white text-white justify-content-between align-items-center position-relative fixed-top ${styles.navbar} ${styles.shadow}`}
+        className={`d-flex bg-white text-white justify-content-between align-items-center fixed-top ${styles.navbar} ${styles.shadow}`}
       >
         <Logo />
         {authenticated ? (
           <>
-            <MenuBar
-              logoutUser={logoutUser}
-              authenticated={authenticated}
-              myHandle={handle}
-            />
-            <Drop />
+            <MenuBar authenticated={authenticated} myHandle={handle} />
+            <Drop logoutUser={logoutUser} />
           </>
         ) : null}
       </div>
