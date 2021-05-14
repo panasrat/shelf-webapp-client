@@ -4,6 +4,14 @@ import Modal from 'react-modal';
 import { connect } from 'react-redux';
 import { addShelf } from '../../redux/actions/userActions';
 
+const modalStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+  },
+};
+
 const AddShelf = ({ addShelf }) => {
   const [open, setOpen] = useState(false);
   const [shelfName, setShelfName] = useState('');
@@ -35,7 +43,7 @@ const AddShelf = ({ addShelf }) => {
       <button className='btn btn-primary' onClick={handleOpen}>
         Add Shelf
       </button>
-      <Modal isOpen={open}>
+      <Modal isOpen={open} style={modalStyles}>
         <h1>Add New Shelf</h1>
         <form onSubmit={handleShelf}>
           <div className='form-group'>
@@ -51,6 +59,7 @@ const AddShelf = ({ addShelf }) => {
               className='btn btn-primary'
               type='submit'
               disabled={shelfName.trim() ? false : true}
+              style={{ marginRight: '10px' }}
             >
               Add Shelf
             </button>

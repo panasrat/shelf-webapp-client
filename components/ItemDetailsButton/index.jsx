@@ -18,6 +18,14 @@ import {
   clearItem,
 } from '../../redux/actions/dataActions';
 
+const modalStyles = {
+  content: {
+    top: '30%',
+    left: '50%',
+    transform: 'translate(-50%, -20%)',
+  },
+};
+
 const ItemDetailsButton = ({
   fromUrl,
   itemId,
@@ -108,7 +116,7 @@ const ItemDetailsButton = ({
       <button className='btn btn-primary' onClick={handleOpen}>
         Item Details
       </button>
-      <Modal isOpen={open}>
+      <Modal isOpen={open} style={modalStyles}>
         <h1>Details</h1>
         <button className='btn btn-primary' onClick={handleClose}>
           Close

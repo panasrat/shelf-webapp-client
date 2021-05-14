@@ -8,7 +8,7 @@ import Header from '../components/Header';
 import { connect } from 'react-redux';
 import { logoutUser } from '../redux/actions/userActions';
 
-const customStyles = {
+const modalStyles = {
   content: {
     top: '50%',
     left: '50%',
@@ -40,7 +40,7 @@ export const AuthRoute = ({ children, authenticated, logoutUser }) => {
       <>
         <Header />
         <div className='nav-offset-m'>
-          <Modal isOpen={open} style={customStyles}>
+          <Modal isOpen={open} style={modalStyles}>
             <div className='d-flex flex-column align-items-center'>
               <picture>
                 <img

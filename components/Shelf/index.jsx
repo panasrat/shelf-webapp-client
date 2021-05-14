@@ -7,6 +7,16 @@ import Item from '../Item';
 import { connect } from 'react-redux';
 import { getShelf } from '../../redux/actions/dataActions';
 
+const modalStyles = {
+  content: {
+    top: '55%',
+    left: '50%',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+  },
+};
+
 const Shelf = ({
   shelf: { shelfId, shelfName, createdAt },
   getShelf,
@@ -39,7 +49,7 @@ const Shelf = ({
         </h4>
         <p>created on {dayjs(createdAt).format('MMM YYYY')}</p>
       </div>
-      <Modal isOpen={open}>
+      <Modal isOpen={open} style={modalStyles}>
         <h3>Items in {shelfName}</h3>
         <button className='btn btn-primary' onClick={handleClose}>
           Cancel

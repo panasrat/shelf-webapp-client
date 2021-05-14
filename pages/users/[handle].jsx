@@ -26,7 +26,6 @@ const user = ({
 }) => {
   useEffect(() => {
     putItemsInStates(userItems);
-    console.log('am i run');
   }, []);
 
   let recentItemsMarkup =
@@ -42,7 +41,7 @@ const user = ({
   return (
     <>
       <Header />
-      <main>
+      <main className='nav-offset-m'>
         <StaticProfile user={userDetails} />
         <div
           className='d-flex justify-content-between'

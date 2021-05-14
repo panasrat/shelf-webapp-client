@@ -4,6 +4,14 @@ import Modal from 'react-modal';
 import { connect } from 'react-redux';
 import { editUserDetails } from '../../redux/actions/userActions';
 
+const modalStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+  },
+};
+
 const EditDetails = ({ credentials, editUserDetails }) => {
   const [bio, setBio] = useState('');
   const [location, setLocation] = useState('');
@@ -56,7 +64,7 @@ const EditDetails = ({ credentials, editUserDetails }) => {
       <button className='btn btn-primary' onClick={handleOpen}>
         Edit Profile
       </button>
-      <Modal isOpen={open}>
+      <Modal isOpen={open} style={modalStyles}>
         <h1>This is {credentials.handle}'s Profile</h1>
         <form onSubmit={handleSubmit}>
           <div className='form-group'>
@@ -87,7 +95,11 @@ const EditDetails = ({ credentials, editUserDetails }) => {
             />
           </div>
           <div>
-            <button className='btn btn-primary' type='submit'>
+            <button
+              className='btn btn-primary'
+              type='submit'
+              style={{ marginRight: '10px' }}
+            >
               Save
             </button>
             <button className='btn btn-primary' onClick={handleClose}>

@@ -6,6 +6,14 @@ import Select from 'react-select';
 import { connect } from 'react-redux';
 import { postItem } from '../../redux/actions/dataActions';
 
+const modalStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+  },
+};
+
 const PostItem = ({ postItem, UI, shelves }) => {
   const [open, setOpen] = useState(false);
   const [post, setPost] = useState('');
@@ -66,7 +74,7 @@ const PostItem = ({ postItem, UI, shelves }) => {
       >
         <img alt='shelf' src='/icons/post.svg' style={{ width: '28px' }} />
       </div>
-      <Modal isOpen={open}>
+      <Modal isOpen={open} style={modalStyles}>
         <h1>Post New Item</h1>
         <form onSubmit={handlePost}>
           <div className='form-group'>
@@ -83,11 +91,12 @@ const PostItem = ({ postItem, UI, shelves }) => {
             // value={options.find((obj) => obj.value === shelfId)}
             onChange={setShelfObj}
           />
-          <div>
+          <div style={{ marginTop: '20px' }}>
             <button
               className='btn btn-primary'
               type='submit'
               disabled={post && shelfObj ? false : true}
+              style={{ marginRight: '10px' }}
             >
               Post
             </button>

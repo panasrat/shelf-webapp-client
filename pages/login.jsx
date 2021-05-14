@@ -8,7 +8,7 @@ const login = () => {
   return (
     <>
       <Header title='Login Page' />
-      <div className='position-relative d-flex justify-content center'>
+      <div className='position-relative d-flex justify-content center nav-offset-m'>
         <div className=''>
           <img src='/images/login-bg.png' width='100%' />
         </div>
@@ -16,14 +16,14 @@ const login = () => {
           className='position-absolute center-absolute text-brown'
           style={{ top: '5rem', textAlign: 'center' }}
         >
-          <h1 style={{ fontSize: '400%', fontWeight: '900' }}>Shelf</h1>
+          <h1 style={{ fontSize: '450%', fontWeight: '900' }}>Shelf</h1>
           <div>Organize your own items</div>
           <div>Let them be yours</div>
         </div>
         <div
           className='position-absolute center-absolute'
           id='login'
-          style={{ top: '15rem' }}
+          style={{ top: '16rem' }}
         >
           <Login />
         </div>
