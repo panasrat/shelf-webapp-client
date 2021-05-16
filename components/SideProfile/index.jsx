@@ -10,9 +10,9 @@ const SideProfile = ({
   return (
     <div
       className='bg-white shadow-drop border-smooth text-darkgrey'
-      style={{ padding: '40px' }}
+      style={{ padding: '3rem' }}
     >
-      <div className='d-flex' style={{ padding: '0px 30px 10px 30px' }}>
+      <div className='d-flex' style={{ padding: '0px 1rem 1rem 1rem' }}>
         <Link href={`/users/${handle}`}>
           <img
             className='clip-image-circle hover-darken'

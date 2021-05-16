@@ -20,9 +20,11 @@ import {
 
 const modalStyles = {
   content: {
-    top: '30%',
+    top: '55%',
     left: '50%',
-    transform: 'translate(-50%, -20%)',
+    bottom: 'auto',
+    marginRight: '-10%',
+    transform: 'translate(-50%, -50%)',
   },
 };
 
@@ -38,6 +40,7 @@ const ItemDetailsButton = ({
     likeCount,
     commentCount,
     comments,
+    shelfName,
   },
   UI: { loading },
   likes,
@@ -79,57 +82,147 @@ const ItemDetailsButton = ({
   const detailsMarkup = loading ? (
     <h1>Loading...</h1>
   ) : (
-    <div className='d-flex' style={{ marginBottom: '1rem' }}>
-      <div className={styles.cardHorizontal}>
-        <img
-          className='card-img-top'
-          src={userImage}
-          style={{ width: '300px', height: '300px' }}
-        />
-        <div className='card-body'>
-          <p className='card-subtitle text-muted'>
-            {dayjs(createdAt).fromNow()}
-          </p>
-          <p className='card-text'>{body}</p>
+    <div className='' style={{ marginBottom: '1rem' }}>
+      <div className='d-flex' style={{ marginBottom: '15px' }}>
+        <div
+          className='d-flex align-items-start'
+          style={{ width: '100px', marginRight: '15px' }}
+        >
           <Link href={`/users/${userHandle}`}>
-            <a className='card-text'>{userHandle}</a>
+            <img
+              className='cursor-pointer card-img-top clip-image-circle hover-darken'
+              src={userImage}
+            />
           </Link>
-          <br />
-          {(
-            likes && likes.find((like) => like.itemId === itemId) ? true : false
-          ) ? (
-            <button onClick={handleUnlike}>undo like</button>
-          ) : (
-            <button onClick={handleLike}>do like</button>
-          )}
-          <span> {likeCount}</span>
-          <p>
-            comment: <span>{commentCount}</span>
-          </p>
-          {isUser ? <DeleteItem itemId={itemId} /> : null}
+        </div>
+        <div
+          className='d-flex flex-column justify-content-center'
+          style={{ width: '100%' }}
+        >
+          <div className='d-flex justify-content-between text-darkgrey'>
+            <Link href={`/users/${userHandle}`}>
+              <div
+                className='cursor-pointer hover-peach'
+                style={{ fontSize: '180%', fontWeight: '700' }}
+              >
+                @{userHandle}
+              </div>
+            </Link>
+          </div>
+          <div style={{ fontSize: '90%' }}>{dayjs(createdAt).fromNow()}</div>
+          <div
+            className='bg-lightgrey'
+            style={{
+              height: '1px',
+              width: '100%',
+              margin: '20px 0px 10px 0px',
+            }}
+          ></div>
+          <div className='d-flex justify-content-between'>
+            <div>
+              <div className='d-flex' style={{ marginBottom: '0px' }}>
+                <div
+                  className='d-flex align-items-center'
+                  style={{ width: '50px' }}
+                >
+                  Add:
+                </div>
+                <div style={{ fontSize: '160%', fontWeight: '700' }}>
+                  {body}
+                </div>
+              </div>
+              <div className='d-flex'>
+                <div
+                  className='d-flex align-items-center'
+                  style={{ width: '50px' }}
+                >
+                  To:
+                </div>
+                <div style={{ fontSize: '100%', fontWeight: '700' }}>
+                  {shelfName}
+                </div>
+              </div>
+            </div>
+            <div>{isUser ? <DeleteItem itemId={itemId} /> : null}</div>
+          </div>
+          <div
+            className='bg-lightgrey'
+            style={{
+              height: '1px',
+              width: '100%',
+              margin: '20px 0px 10px 0px',
+            }}
+          ></div>
+          <div
+            className='d-flex justify-content-between align-items-center text-mute'
+            style={{ fontSize: '80%' }}
+          >
+            <div className='d-flex'>
+              {(
+                likes && likes.find((like) => like.itemId === itemId)
+                  ? true
+                  : false
+              ) ? (
+                <div
+                  className='d-flex align-items-center cursor-pointer'
+                  onClick={handleUnlike}
+                >
+                  <img
+                    alt='shelf'
+                    src='/icons/heart-fill.svg'
+                    style={{ width: '20px' }}
+                  />
+                </div>
+              ) : (
+                <div
+                  className='d-flex align-items-center cursor-pointer'
+                  onClick={handleLike}
+                >
+                  <img
+                    alt='shelf'
+                    src='/icons/heart-empty.svg'
+                    style={{ width: '20px' }}
+                  />
+                </div>
+              )}
+              <div style={{ marginLeft: '10px' }}>
+                <div>{likeCount} people like this</div>
+              </div>
+            </div>
+            <div className='d-flex'>
+              <div style={{ marginLeft: '10px' }}>{commentCount} Comments</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   );
   return (
     <>
-      <div className='cursor-pointer' onClick={handleOpen}>
+      <div className='cursor-pointer hover-light' onClick={handleOpen}>
         <img
           alt='shelf'
-          src='/icons/plus-circle.svg'
-          style={{ width: '18px' }}
+          src='/icons/arrow-down.svg'
+          style={{ width: '17px' }}
         />
       </div>
       <Modal isOpen={open} style={modalStyles}>
-        <h1>Details</h1>
-        <button className='btn btn-primary' onClick={handleClose}>
-          Close
-        </button>
-        {detailsMarkup}
-        <h4>Comments</h4>
-        <CommentForm itemId={itemId} />
-        <br />
-        <Comments comments={comments} credentials={credentials} />
+        <div className='text-darkgrey' style={{ padding: '1rem 2rem' }}>
+          <div className='d-flex justify-content-end'>
+            <div className='cursor-pointer hover-light' onClick={handleClose}>
+              <img
+                alt='shelf'
+                src='/icons/close.svg'
+                style={{ width: '18px' }}
+              />
+            </div>
+          </div>
+          {detailsMarkup}
+          <h4>Comments</h4>
+          <CommentForm itemId={itemId} />
+          <br />
+          <Comments comments={comments} credentials={credentials} />
+        </div>
       </Modal>
     </>
   );

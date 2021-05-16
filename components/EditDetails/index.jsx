@@ -62,7 +62,7 @@ const EditDetails = ({ credentials, editUserDetails }) => {
   return (
     <>
       <div
-        className='d-flex align-items-center cursor-pointer'
+        className='d-flex justify-content-end cursor-pointer'
         onClick={handleOpen}
         style={{ width: '15rem' }}
       >

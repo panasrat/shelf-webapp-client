@@ -75,10 +75,9 @@ const Shelf = ({
                 />
               </div>
             </div>
-            <div>Owner: {userHandle}</div>
+            <div>Owner: @{userHandle}</div>
             <p>Created on {dayjs(createdAt).format('DD MMM YYYY')}</p>
           </div>
-
           {detailsMarkup}
         </div>
       </Modal>

@@ -33,6 +33,8 @@ const StaticProfile = ({
             src={imageUrl}
             style={{ width: '100%' }}
           />
+        </div>
+        <div className='d-flex justify-content-end' style={{ width: '250px' }}>
           {handle === credentials.handle ? (
             <>
               <input
@@ -72,12 +74,12 @@ const StaticProfile = ({
           </Link>
         </div>
         <div className='text-center' style={{ fontSize: '90%' }}>
-          {bio && <div>{bio}</div>}
-          <div>{location && <div>Live in {location}</div>}</div>
+          {bio && <div>{credentials.bio}</div>}
+          <div>{location && <div>Live in {credentials.location}</div>}</div>
           <div>
             {website && (
-              <a href={website} target='_blank'>
-                {website}
+              <a href={credentials.website} target='_blank'>
+                {credentials.website}
               </a>
             )}
           </div>
@@ -85,7 +87,9 @@ const StaticProfile = ({
             Join since {dayjs(createdAt).format('MMM YYYY')}
           </div>
         </div>
-        {handle === credentials.handle ? <EditDetails /> : null}
+        <div className='d-flex' style={{ width: '250px' }}>
+          {handle === credentials.handle ? <EditDetails /> : null}
+        </div>
         <div
           className='bg-lightgrey'
           style={{

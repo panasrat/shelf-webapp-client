@@ -25,7 +25,12 @@ const CommentForm = ({ itemId, submitComment }) => {
           onChange={handleChange}
           value={comment}
         />
-        <button className='btn btn-primary' type='submit' disabled={!comment}>
+        <button
+          className='btn btn-primary'
+          style={{ marginLeft: '1rem' }}
+          type='submit'
+          disabled={!comment}
+        >
           Submit
         </button>
       </div>

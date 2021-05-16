@@ -33,7 +33,7 @@ const DeleteItem = ({ itemId, deleteItem }) => {
 
   return (
     <>
-      <button className='btn btn-primary' onClick={handleOpen}>
+      <button className='btn btn-danger' onClick={handleOpen}>
         Delete
       </button>
       <Modal isOpen={open} style={modalStyles}>

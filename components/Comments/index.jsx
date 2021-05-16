@@ -11,19 +11,35 @@ const Comments = ({ comments, credentials }) => {
       const { body, createdAt, userImage, userHandle } = comment;
       const isUser = userHandle === credentials.handle ? true : false;
       return (
-        <div key={createdAt}>
+        <div key={createdAt} style={{ marginBottom: '1rem' }}>
           <div className='d-flex'>
-            <img src={userImage} style={{ width: '120px' }} />
-            <div style={{ paddingLeft: '20px' }}>
+            <div
+              className='d-flex align-items-start'
+              style={{ width: '60px', marginRight: '15px', marginTop: '6px' }}
+            >
               <Link href={`/users/${userHandle}`}>
-                <a className='card-text'>{userHandle}</a>
+                <img
+                  className='cursor-pointer card-img-top clip-image-circle hover-darken'
+                  src={userImage}
+                />
               </Link>
-              <p>{body}</p>
-              <p>{dayjs(createdAt).fromNow()}</p>
-              {isUser ? <button disabled={true}>Delete Comment</button> : null}
+            </div>
+            <div>
+              <Link href={`/users/${userHandle}`}>
+                <div
+                  className='cursor-pointer hover-peach'
+                  style={{ fontWeight: '700' }}
+                >
+                  @{userHandle}
+                </div>
+              </Link>
+              <div>{body}</div>
+              <div className='' style={{ fontSize: '80%' }}>
+                {dayjs(createdAt).fromNow()}
+              </div>
+              {/* {isUser ? <button disabled={true}>Delete Comment</button> : null} */}
             </div>
           </div>
-          <br />
         </div>
       );
     })
