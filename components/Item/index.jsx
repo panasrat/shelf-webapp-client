@@ -38,7 +38,7 @@ const TripplePointsMenu = ({ isUser, itemId }) => {
         padding: '20px',
       }}
     >
-      {isUser ? <DeleteItem itemId={itemId} /> : null}
+      {isUser ? <DeleteItem itemId={itemId} /> : <div>No menu</div>}
     </div>
   );
 };
