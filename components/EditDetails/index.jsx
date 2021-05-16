@@ -61,9 +61,13 @@ const EditDetails = ({ credentials, editUserDetails }) => {
 
   return (
     <>
-      <button className='btn btn-primary' onClick={handleOpen}>
-        Edit Profile
-      </button>
+      <div
+        className='d-flex align-items-center cursor-pointer'
+        onClick={handleOpen}
+        style={{ width: '15rem' }}
+      >
+        <img alt='shelf' src='/icons/edit-pic.svg' style={{ width: '15px' }} />
+      </div>
       <Modal isOpen={open} style={modalStyles}>
         <h1>This is {credentials.handle}'s Profile</h1>
         <form onSubmit={handleSubmit}>

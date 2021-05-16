@@ -32,17 +32,17 @@ const MenuBar = ({ myHandle }) => {
             <img
               alt='shelf'
               src='/icons/profile.svg'
-              style={{ width: '30px' }}
+              style={{ width: '27px' }}
             />
           </div>
         </Link>
         <Link href='/'>
           <div className='d-flex align-items-center hover-light cursor-pointer'>
-            <img alt='shelf' src='/icons/home.svg' style={{ width: '32px' }} />
+            <img alt='shelf' src='/icons/home.svg' style={{ width: '29px' }} />
           </div>
         </Link>
         <div className='d-flex align-items-center cursor-not-allowed'>
-          <img alt='shelf' src='/icons/search.svg' style={{ width: '30px' }} />
+          <img alt='shelf' src='/icons/search.svg' style={{ width: '27px' }} />
         </div>
         <PostItem />
       </>

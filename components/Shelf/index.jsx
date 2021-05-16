@@ -12,13 +12,13 @@ const modalStyles = {
     top: '55%',
     left: '50%',
     bottom: 'auto',
-    marginRight: '-50%',
+    marginRight: '-10%',
     transform: 'translate(-50%, -50%)',
   },
 };
 
 const Shelf = ({
-  shelf: { shelfId, shelfName, createdAt },
+  shelf: { shelfId, shelfName, createdAt, userHandle },
   getShelf,
   data: {
     shelf: { items },
@@ -43,19 +43,44 @@ const Shelf = ({
   };
   return (
     <>
-      <div className='bg-pink text-brown'>
-        <h4 onClick={handleOpen}>
-          <a className='cursor-pointer hover-brown'>{shelfName}</a>
-        </h4>
-        <p>created on {dayjs(createdAt).format('MMM YYYY')}</p>
+      <div
+        className='bg-pink text-darkgrey border-smooth shadow-drop cursor-pointer hover-darken'
+        style={{ padding: '10px', marginBottom: '15px' }}
+        onClick={handleOpen}
+      >
+        <div>
+          <div
+            className='text-center'
+            style={{ fontWeight: '700', fontSize: '150%' }}
+          >
+            {shelfName}
+          </div>
+        </div>
+        <div className='text-center' style={{ marginTop: '10px' }}>
+          Created on {dayjs(createdAt).format('DD MMM YYYY')}
+        </div>
       </div>
       <Modal isOpen={open} style={modalStyles}>
-        <h3>Items in {shelfName}</h3>
-        <button className='btn btn-primary' onClick={handleClose}>
-          Cancel
-        </button>
-        <p>{dayjs(createdAt).format('MMM YYYY')}</p>
-        {detailsMarkup}
+        <div className='' style={{ padding: '0px 3rem' }}>
+          <div>
+            <div className='d-flex justify-content-between'>
+              <div style={{ fontWeight: '700', fontSize: '200%' }}>
+                {shelfName}
+              </div>
+              <div className='cursor-pointer hover-light' onClick={handleClose}>
+                <img
+                  alt='shelf'
+                  src='/icons/close.svg'
+                  style={{ width: '18px' }}
+                />
+              </div>
+            </div>
+            <div>Owner: {userHandle}</div>
+            <p>Created on {dayjs(createdAt).format('DD MMM YYYY')}</p>
+          </div>
+
+          {detailsMarkup}
+        </div>
       </Modal>
     </>
   );

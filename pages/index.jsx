@@ -25,12 +25,9 @@ const home = ({ putItemsInStates, items, data }) => {
       <main className='nav-offset-m' style={{ zIndex: '0' }}>
         <div
           className='d-flex justify-content-between'
-          style={{ padding: '30px 300px', width: '100%' }}
+          style={{ padding: '30px 15rem', width: '100%' }}
         >
-          <div
-            className='bg-brown text-white shadow-box'
-            style={{ width: '40%' }}
-          >
+          <div className='' style={{ width: '40%' }}>
             <SideProfile />
           </div>
           <div className='' style={{ width: '55%' }}>

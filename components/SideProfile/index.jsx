@@ -2,54 +2,50 @@ import React from 'react';
 import Link from 'next/link';
 import dayjs from 'dayjs';
 
-import EditDetails from '../EditDetails';
-
 import { connect } from 'react-redux';
-import { logoutUser, uploadImage } from '../../redux/actions/userActions';
 
 const SideProfile = ({
   credentials: { bio, handle, imageUrl, createdAt, location, website },
-  uploadImage,
 }) => {
-  const handleImageChange = (event) => {
-    const image = event.target.files[0];
-    const formData = new FormData();
-    formData.append('image', image, image.name);
-    uploadImage(formData);
-  };
-
-  const handleEditPicture = () => {
-    const fileInput = document.getElementById('imageInput');
-    fileInput.click();
-  };
-
   return (
-    <>
-      <Link href={`/users/${handle}`}>
-        <h2 className='cursor-pointer hover-peach'>@{handle}</h2>
-      </Link>
-      <div style={{ width: '300px' }}>
-        <img
-          className='clip-image-circle'
-          src={imageUrl}
-          style={{ width: '100%' }}
-        />
-        <input
-          type='file'
-          id='imageInput'
-          hidden='hidden'
-          onChange={handleImageChange}
-        />
-        <button className='btn btn-primary' onClick={handleEditPicture}>
-          Change Image
-        </button>
+    <div
+      className='bg-white shadow-drop border-smooth text-darkgrey'
+      style={{ padding: '40px' }}
+    >
+      <div className='d-flex' style={{ padding: '0px 30px 10px 30px' }}>
+        <Link href={`/users/${handle}`}>
+          <img
+            className='clip-image-circle hover-darken'
+            src={imageUrl}
+            style={{ width: '100%' }}
+          />
+        </Link>
       </div>
-      {bio && <p>{bio}</p>}
-      {location && <p>{location}</p>}
-      {website && <p>{website}</p>}
-      <p>{dayjs(createdAt).format('MMM YYYY')}</p>
-      <EditDetails />
-    </>
+      <div className='d-flex justify-content-center'>
+        <Link href={`/users/${handle}`}>
+          <div
+            className='cursor-pointer hover-peach'
+            style={{ fontSize: '200%', fontWeight: '700' }}
+          >
+            @{handle}
+          </div>
+        </Link>
+      </div>
+      <div className='text-center' style={{ fontSize: '80%' }}>
+        {bio && <div style={{ paddingBottom: '20px' }}>{bio}</div>}
+        <div>{location && <div>Live in {location}</div>}</div>
+        <div>
+          {website && (
+            <a href={website} target='_blank'>
+              {website}
+            </a>
+          )}
+        </div>
+        <div style={{ marginTop: '20px' }}>
+          Join since {dayjs(createdAt).format('MMM YYYY')}
+        </div>
+      </div>
+    </div>
   );
 };
 
@@ -57,6 +53,4 @@ const mapStateToProps = (state) => ({
   credentials: state.user.credentials,
 });
 
-const mapActionsToProp = { logoutUser, uploadImage };
-
-export default connect(mapStateToProps, mapActionsToProp)(SideProfile);
+export default connect(mapStateToProps)(SideProfile);

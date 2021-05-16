@@ -34,6 +34,7 @@ const TripplePointsMenu = ({ isUser, itemId }) => {
         position: 'absolute',
         width: '200px',
         top: '30px',
+        right: '-40px',
         padding: '20px',
       }}
     >

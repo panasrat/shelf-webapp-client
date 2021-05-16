@@ -72,7 +72,7 @@ const PostItem = ({ postItem, UI, shelves }) => {
         className='d-flex align-items-center hover-light cursor-pointer'
         onClick={handleOpen}
       >
-        <img alt='shelf' src='/icons/post.svg' style={{ width: '28px' }} />
+        <img alt='shelf' src='/icons/post.svg' style={{ width: '25px' }} />
       </div>
       <Modal isOpen={open} style={modalStyles}>
         <h1>Post New Item</h1>

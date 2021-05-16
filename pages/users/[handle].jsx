@@ -45,13 +45,37 @@ const user = ({
         <StaticProfile user={userDetails} />
         <div
           className='d-flex justify-content-between'
-          style={{ padding: '30px 200px' }}
+          style={{ padding: '30px 15rem', width: '100%' }}
         >
-          <div className='bg-brown text-white shadow-box'>
-            {handle === userDetails.handle ? <AddShelf /> : null}
-            {recentShelvesMarkup}
+          <div style={{ width: '40%' }}>
+            <div
+              className='bg-white border-smooth shadow-drop'
+              style={{ padding: '25px' }}
+            >
+              <div className='d-flex justify-content-between text-darkgrey'>
+                <div style={{ fontSize: '150%', fontWeight: '700' }}>
+                  {handle === userDetails.handle ? (
+                    <div>My Shelf</div>
+                  ) : (
+                    <div>{userDetails.handle}'s Shelf</div>
+                  )}
+                </div>
+                {handle === userDetails.handle ? <AddShelf /> : null}
+              </div>
+              <div
+                className='bg-lightgrey'
+                style={{
+                  width: '100%',
+                  height: '1px',
+                  margin: '10px 0px 20px 0px',
+                }}
+              ></div>
+              {recentShelvesMarkup}
+            </div>
           </div>
-          <div className='col-7 bg-pink shadow-box'>{recentItemsMarkup}</div>
+          <div className='' style={{ width: '55%' }}>
+            {recentItemsMarkup}
+          </div>
         </div>
       </main>
     </>
