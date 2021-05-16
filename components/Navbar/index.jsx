@@ -79,7 +79,9 @@ const DropMenu = ({ logoutUser }) => {
     logoutUser();
   };
   return (
-    <div className={`bg-white text-brown shadow-box ${styles.dropdown}`}>
+    <div
+      className={`bg-white text-brown shadow-box ${styles.dropdown} border-smooth`}
+    >
       <button className='btn btn-primary' onClick={handleLogout}>
         Logout
       </button>

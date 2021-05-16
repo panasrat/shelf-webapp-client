@@ -63,7 +63,7 @@ const Signup = ({ UI, signupUser }) => {
           <input
             type='email'
             className='form-control'
-            id='exampleInputEmail1'
+            id='exampleInputEmail2'
             aria-describedby='emailHelp'
             placeholder='Enter email'
             onChange={handleChangeEmail}
@@ -78,7 +78,7 @@ const Signup = ({ UI, signupUser }) => {
           <input
             type='password'
             className='form-control'
-            id='exampleInputPassword1'
+            id='exampleInputPassword2'
             placeholder='Password'
             onChange={handleChangePassword}
             value={password}

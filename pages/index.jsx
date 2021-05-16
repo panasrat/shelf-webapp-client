@@ -25,12 +25,15 @@ const home = ({ putItemsInStates, items, data }) => {
       <main className='nav-offset-m' style={{ zIndex: '0' }}>
         <div
           className='d-flex justify-content-between'
-          style={{ padding: '30px 200px' }}
+          style={{ padding: '30px 300px', width: '100%' }}
         >
-          <div className='bg-brown text-white shadow-box' style={{}}>
+          <div
+            className='bg-brown text-white shadow-box'
+            style={{ width: '40%' }}
+          >
             <SideProfile />
           </div>
-          <div className='col-7 bg-pink shadow-box' style={{}}>
+          <div className='' style={{ width: '55%' }}>
             {recentItemsMarkup}
           </div>
         </div>

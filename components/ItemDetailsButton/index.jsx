@@ -113,9 +113,13 @@ const ItemDetailsButton = ({
   );
   return (
     <>
-      <button className='btn btn-primary' onClick={handleOpen}>
-        Item Details
-      </button>
+      <div className='cursor-pointer' onClick={handleOpen}>
+        <img
+          alt='shelf'
+          src='/icons/plus-circle.svg'
+          style={{ width: '18px' }}
+        />
+      </div>
       <Modal isOpen={open} style={modalStyles}>
         <h1>Details</h1>
         <button className='btn btn-primary' onClick={handleClose}>

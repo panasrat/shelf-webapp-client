@@ -127,3 +127,7 @@ $custom-colors: map-merge(
 .border-smooth {
   border-radius: 10px;
 }
+
+.clip-image-circle {
+  clip-path: circle(50% at 50% 50%);
+}
