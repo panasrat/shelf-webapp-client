@@ -7,7 +7,7 @@ import Signup from '../components/Signup';
 const login = () => {
   return (
     <>
-      <Header title='Login Page' />
+      <Header title='Getting Start' />
       <div className='position-relative d-flex justify-content center nav-offset-m'>
         <div className=''>
           <img src='/images/login-bg.png' width='100%' />

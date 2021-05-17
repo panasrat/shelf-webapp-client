@@ -40,7 +40,7 @@ const user = ({
 
   return (
     <>
-      <Header />
+      <Header title={`${userDetails.handle}`} />
       <main className='nav-offset-m'>
         <StaticProfile user={userDetails} />
         <div
