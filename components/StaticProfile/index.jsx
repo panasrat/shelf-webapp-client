@@ -24,14 +24,17 @@ const StaticProfile = ({
     fileInput.click();
   };
 
+  const userPic =
+    handle === credentials.handle ? credentials.imageUrl : imageUrl;
+
   return (
     <div className='bg-white shadow-drop'>
       <div className='d-flex flex-column align-items-center'>
         <div style={{ paddingTop: '50px', width: '15rem' }}>
           <img
             className='clip-image-circle'
-            src={imageUrl}
-            style={{ width: '100%' }}
+            src={userPic}
+            style={{ width: '100%', objectFit: 'cover' }}
           />
         </div>
         <div className='d-flex justify-content-end' style={{ width: '250px' }}>
